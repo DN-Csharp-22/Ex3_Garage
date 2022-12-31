@@ -41,19 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarColors.cs" />
-    <Compile Include="DoorAmount.cs" />
-    <Compile Include="ElectricVehicle.cs" />
-    <Compile Include="GasType.cs" />
-    <Compile Include="GasVehicle.cs" />
-    <Compile Include="Vehicle.cs" />
+    <Compile Include="Enums\CarColors.cs" />
+    <Compile Include="Enums\DoorAmount.cs" />
+    <Compile Include="ConcreteVehicles\ElectricCar.cs" />
+    <Compile Include="ConcreteVehicles\ElectricMotorcycle.cs" />
+    <Compile Include="Models\ElectricVehicle.cs" />
+    <Compile Include="ConcreteVehicles\GasCar.cs" />
+    <Compile Include="ConcreteVehicles\GasMotorcycle.cs" />
+    <Compile Include="Enums\GasType.cs" />
+    <Compile Include="Models\GasVehicle.cs" />
+    <Compile Include="Enums\LicenseType.cs" />
+    <Compile Include="ConcreteVehicles\Truck.cs" />
+    <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VehicleFactory.cs" />
-    <Compile Include="VehicleStatus.cs" />
-    <Compile Include="Wheel.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <Compile Include="GarageManager.cs" />
+    <Compile Include="Enums\VehicleStatus.cs" />
+    <Compile Include="Models\Wheel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

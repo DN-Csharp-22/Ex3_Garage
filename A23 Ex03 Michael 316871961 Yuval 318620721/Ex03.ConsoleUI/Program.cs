@@ -90,6 +90,9 @@ namespace Ex03.ConsoleUI
 
                     string changeStatusOptionInput = InputUtils.GetUserInput("Please choose Gas type :\n1. Octan95\n2. Octan96\n3. Octan98\n 4. Soler");
 
+                    //TODO validate that the amount is a valid positive integer
+                    int amountToFill = int.Parse(InputUtils.GetUserInput("Please insert amount of gas to fill"));
+
                     if (int.TryParse(changeStatusOptionInput, out int changeStatusOption))
                     {
                         switch (changeStatusOption - 1)
@@ -98,7 +101,7 @@ namespace Ex03.ConsoleUI
                             case (int)GasType.Octan96:
                             case (int)GasType.Octan98:
                             case (int)GasType.Soler:
-                                garageManager.FillGasTank(carLicenseNumber);
+                                garageManager.FillGasTank(carLicenseNumber, (GasType)(changeStatusOption - 1), amountToFill);
                                 isInputValid = true;
                                 break;
                             default:
