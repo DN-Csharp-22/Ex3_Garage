@@ -4,6 +4,6 @@
     {
         InService,
         Fixed,
-        Complited
+        Completed
     }
 }

@@ -46,19 +46,20 @@ namespace Ex03.ConsoleUI
             {
                 switch (actionNumber)
                 {
-                    case 1:
+                    case 1: //add
 
                         break;
-                    case 2://display current vehicles list with filter options
-                        VehicleStatus status = (VehicleStatus)actionNumber;
-
-
+                    case 2:
+                        displayGarageCars(garageManager);
                         break;
                     case 3:
+                        changeCarStatus(garageManager);
                         break;
                     case 4:
+                        fillTiresToMaximun(garageManager);
                         break;
                     case 5:
+                        fillGasTank(garageManager);
                         break;
                     case 6:
                         break;
@@ -74,6 +75,97 @@ namespace Ex03.ConsoleUI
 
             string carLicenseNumber = InputUtils.GetUserInput("Please insert your car license number");
         }
+
+        private static void fillGasTank(GarageManager garageManager)
+        {
+            List<Vehicle> currentVehiclesInGarage = garageManager.getCurrentVehiclesInGarage();
+
+            if (currentVehiclesInGarage.Count > 0)
+            {
+                bool isInputValid = false;
+
+                while (!isInputValid)
+                {
+                    string carLicenseNumber = getVehicleLicenseNumber(garageManager);
+
+                    string changeStatusOptionInput = InputUtils.GetUserInput("Please choose Gas type :\n1. Octan95\n2. Octan96\n3. Octan98\n 4. Soler");
+
+                    if (int.TryParse(changeStatusOptionInput, out int changeStatusOption))
+                    {
+                        switch (changeStatusOption - 1)
+                        {
+                            case (int)GasType.Octan95:
+                            case (int)GasType.Octan96:
+                            case (int)GasType.Octan98:
+                            case (int)GasType.Soler:
+                                garageManager.FillGasTank(carLicenseNumber);
+                                isInputValid = true;
+                                break;
+                            default:
+                                Console.WriteLine("Invalid option was chosen : Please choose an integer from the given options above");
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid integer was inserted");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("No vehicles in garage, please add first a vehicle");
+            }
+        }
+
+        private static void fillTiresToMaximun(GarageManager garageManager)
+        {
+            string carLicenseNumber = getVehicleLicenseNumber(garageManager);
+
+            garageManager.fillTires(carLicenseNumber);
+        }
+
+        public static void changeCarStatus(GarageManager garageManager)
+        {
+            bool isInputValid = false;
+
+            List<Vehicle> currentVehiclesInGarage = garageManager.getCurrentVehiclesInGarage();
+
+            if (currentVehiclesInGarage.Count > 0)
+            {
+                while (!isInputValid)
+                {
+                    string carLicenseNumber = getVehicleLicenseNumber(garageManager);
+
+                    string changeStatusOptionInput = InputUtils.GetUserInput("Please choose status option :\n1. InService\n2. Fixed\n3. Completed");
+
+                    if (int.TryParse(changeStatusOptionInput, out int changeStatusOption))
+                    {
+                        switch (changeStatusOption - 1)
+                        {
+                            case (int)VehicleStatus.InService:
+                            case (int)VehicleStatus.Fixed:
+                            case (int)VehicleStatus.Completed:
+                                garageManager.updateVehicleStatus(carLicenseNumber, (VehicleStatus)changeStatusOption);
+                                isInputValid = true;
+                                break;
+                            default:
+                                Console.WriteLine("Invalid option was chosen : Please choose an integer from the given options above");
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid integer was inserted");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("No vehicles in garage, please add first a vehicle");
+            }
+        }
+
         public static string GetActionNumber()
         {
             Console.WriteLine(@"Hello please choose on of the following options :
@@ -88,6 +180,69 @@ namespace Ex03.ConsoleUI
             string actionNumber = Console.ReadLine();
 
             return actionNumber;
+        }
+
+        public static void displayGarageCars(GarageManager garageManager)
+        {
+            List<Vehicle> listOfVehiclesAtGarage = garageManager.getCurrentVehiclesInGarage();
+
+            List<string> listOfVehicleIds = listOfVehiclesAtGarage.Select(vehicle => vehicle.IdNumber).ToList();
+
+            Console.WriteLine(string.Format("All vehicles at garage are :\n {0}",
+                             string.Join("\n", listOfVehiclesAtGarage.Select(v => v.IdNumber).ToArray())));
+
+            bool isInputValid = false;
+
+            while (!isInputValid)
+            {
+                string filterOptionInput = InputUtils.GetUserInput("Filter list of vehicles :\n1. InService\n2. Fixed\n3. Completed\n4. No filltering");
+
+                if (int.TryParse(filterOptionInput, out int filterOption))
+                {
+                    switch (filterOption - 1)
+                    {
+                        case (int)VehicleStatus.InService:
+                        case (int)VehicleStatus.Fixed:
+                        case (int)VehicleStatus.Completed:
+                            listOfVehicleIds = listOfVehiclesAtGarage
+                                .Where(vechile => vechile.vehicleStatus == (VehicleStatus)filterOption - 1)
+                                .Select(vehicle => vehicle.IdNumber).ToList();
+
+                            Console.WriteLine(string.Format("Filtered vehicles are :\n {0}",
+                              string.Join("\n", listOfVehiclesAtGarage.Select(v => v.IdNumber).ToArray())));
+                            isInputValid = true;
+                            break;
+                        case 4:
+                            isInputValid = true;
+                            break;
+                        default:
+                            Console.WriteLine("Please choose an integer from the given options above");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid integer was inserted");
+                }
+            }
+        }
+
+        public static string getVehicleLicenseNumber(GarageManager garageManager, bool isVehicleMUstBeInGarage = true)
+        {
+            string carLicenseNumber = InputUtils.GetUserInput("Please insert your car license number");
+
+            if (isVehicleMUstBeInGarage)
+            {
+                List<Vehicle> currentVehiclesInGarage = garageManager.getCurrentVehiclesInGarage();
+
+                while (!currentVehiclesInGarage.Any(vehicle => vehicle.IdNumber == carLicenseNumber))
+                {
+                    Console.WriteLine(string.Format("Cannot find a vehicle with license number : {0}", carLicenseNumber));
+                    carLicenseNumber = InputUtils.GetUserInput("Please insert your car license number");
+                }
+            }
+
+            return carLicenseNumber;
         }
     }
 }

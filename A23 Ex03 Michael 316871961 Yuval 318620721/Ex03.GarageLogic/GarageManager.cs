@@ -10,16 +10,9 @@ namespace Ex03.GarageLogic
 
         private Dictionary<string, Vehicle> VehiclesInGarage { get; set; }
 
-        public List<string> getCarList(VehicleStatus vehicleStatus)
+        public List<Vehicle> getCurrentVehiclesInGarage()
         {
-            List<string> result = VehiclesInGarage.Where(vechile => vechile.Value.vehicleStatus == vehicleStatus)
-                .Select(vehicle => vehicle.Key).ToList();
-
-            return result;
-        }
-        public List<string> getCarList()
-        {
-            List<string> result = VehiclesInGarage.Keys.ToList();
+            List<Vehicle> result = VehiclesInGarage.Values.ToList();
 
             return result;
         }
@@ -37,6 +30,51 @@ namespace Ex03.GarageLogic
                     break;
             }
             return null;
+        }
+
+        public void updateVehicleStatus(string carLicenseNumber, VehicleStatus changeStatusOptionInput)
+        {
+            VehiclesInGarage[carLicenseNumber].vehicleStatus = changeStatusOptionInput;
+        }
+
+        public void fillTires(string carLicenseNumber)
+        {
+            Vehicle currentVehicle = VehiclesInGarage[carLicenseNumber];
+
+            foreach (Wheel wheel in currentVehicle.wheels)
+            {
+                wheel.FillTirePressure(wheel.MaxPressure - wheel.CurrentPressure);
+            }
+        }
+
+        public void FillGasTank(string carLicenseNumber, GasType gasType, int amountToFill)
+        {
+            if (VehiclesInGarage[carLicenseNumber].GetType() == typeof(GasCar))
+            {
+                GasCar gasCar = (GasCar)VehiclesInGarage[carLicenseNumber];
+
+                if (gasCar.gasType != gasType)
+                {
+                    throw new ArgumentException("Requested Gas type differs from the current gas type");
+                }
+
+                gasCar.FillGas(amountToFill);
+            }
+            else if (VehiclesInGarage[carLicenseNumber].GetType() == typeof(GasMotorcycle))
+            {
+                GasMotorcycle gasMotorcycle = (GasMotorcycle)VehiclesInGarage[carLicenseNumber];
+
+                if (gasMotorcycle.gasType != gasType)
+                {
+                    throw new ArgumentException("Requested Gas type differs from the current gas type");
+                }
+
+                gasMotorcycle.FillGas(amountToFill);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Vehicle with number : {0} is not an gas vehicle!", carLicenseNumber));
+            }
         }
     }
 }
