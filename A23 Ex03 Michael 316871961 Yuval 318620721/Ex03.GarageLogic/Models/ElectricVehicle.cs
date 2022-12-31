@@ -2,12 +2,12 @@
 
 namespace Ex03.GarageLogic
 {
-    public class ElectricVehicle : Vehicle
+    public abstract class ElectricVehicle : Vehicle
     {
         public float AccumulatorTimeLeft { get; set; }
         public int AccumulatorMaxTime { get; set; }
 
-        public void AccumulatorFill (float amountToFill)
+        public void RechargeAccumulator (float amountToFill)
         {
             if (this.AccumulatorTimeLeft + amountToFill > this.AccumulatorMaxTime)
             {
@@ -16,6 +16,5 @@ namespace Ex03.GarageLogic
 
             this.AccumulatorTimeLeft += amountToFill;
         }
-
     }
 }
