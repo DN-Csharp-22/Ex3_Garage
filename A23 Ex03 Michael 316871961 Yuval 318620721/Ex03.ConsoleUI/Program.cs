@@ -90,8 +90,8 @@ namespace Ex03.ConsoleUI
 
                     string changeStatusOptionInput = InputUtils.GetUserInput("Please choose Gas type :\n1. Octan95\n2. Octan96\n3. Octan98\n 4. Soler");
 
-                    //TODO validate that the amount is a valid positive integer
-                    int amountToFill = int.Parse(InputUtils.GetUserInput("Please insert amount of gas to fill"));
+                    //TODO validate that the amount is a valid positive integer===> Yuval : ***i did it look at line 252**
+                    int gasAmountToFill = getGasAmountToFill();
 
                     if (int.TryParse(changeStatusOptionInput, out int changeStatusOption))
                     {
@@ -101,7 +101,7 @@ namespace Ex03.ConsoleUI
                             case (int)GasType.Octan96:
                             case (int)GasType.Octan98:
                             case (int)GasType.Soler:
-                                garageManager.FillGasTank(carLicenseNumber, (GasType)(changeStatusOption - 1), amountToFill);
+                                garageManager.FillGasTank(carLicenseNumber, (GasType)(changeStatusOption - 1), gasAmountToFill);
                                 isInputValid = true;
                                 break;
                             default:
@@ -246,6 +246,34 @@ namespace Ex03.ConsoleUI
             }
 
             return carLicenseNumber;
+        }
+
+        public static int getGasAmountToFill() //TO validate that the amount is a valid positive integer
+        {
+            bool isValid = false;
+
+            int amountToFill = 0; //defult
+
+            while (!isValid) // run until input is valid
+            {
+                string amountToFillInput = InputUtils.GetUserInput("Please insert amount of gas to fill");
+
+                if (int.TryParse(amountToFillInput, out amountToFill))
+                {
+
+                    if (amountToFill >= 0)
+                    {
+                        isValid = false;
+
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid gas amount was inserted");
+
+                }
+            }
+            return amountToFill;
         }
     }
 }
