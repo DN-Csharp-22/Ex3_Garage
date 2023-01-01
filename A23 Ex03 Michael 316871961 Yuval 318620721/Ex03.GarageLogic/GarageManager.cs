@@ -47,6 +47,16 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public void chargingElectricMotor(string carLicenseNumber, int chargeTimeInMinutes)
+        {
+            int chargeTimeInHours = chargeTimeInMinutes / 60;
+
+            ElectricCar electricCar = (ElectricCar)VehiclesInGarage[carLicenseNumber];
+
+            electricCar.RechargeAccumulator(chargeTimeInHours);
+
+        }
+
         public void FillGasTank(string carLicenseNumber, GasType gasType, int amountToFill)
         {
             if (VehiclesInGarage[carLicenseNumber].GetType() == typeof(GasCar))
@@ -74,6 +84,21 @@ namespace Ex03.GarageLogic
             else
             {
                 throw new ArgumentException(string.Format("Vehicle with number : {0} is not an gas vehicle!", carLicenseNumber));
+            }
+        }
+
+        public void displayVehicleData(string carLicenseNumber)
+        {
+            Vehicle currentVehicle = VehiclesInGarage[carLicenseNumber];
+            Console.WriteLine("Model type is " + currentVehicle.Model);
+            Console.WriteLine("license number is " + currentVehicle.IdNumber);
+            Console.WriteLine("vehicle garage status is " + currentVehicle.vehicleStatus);
+            Console.WriteLine("vehicle energy status is " + currentVehicle.AmountOfEnergyLeft);
+            foreach (Wheel wheel in currentVehicle.wheels)
+            {
+                Console.WriteLine("wheels Manufacturer Name is " + wheel.ManufacturerName);
+                Console.WriteLine("wheels Maximum Pressure is " + wheel.CurrentPressure);
+                break;
             }
         }
     }

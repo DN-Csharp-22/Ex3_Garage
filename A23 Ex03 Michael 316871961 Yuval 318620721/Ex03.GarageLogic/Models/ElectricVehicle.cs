@@ -7,14 +7,14 @@ namespace Ex03.GarageLogic
         public float AccumulatorTimeLeft { get; set; }
         public int AccumulatorMaxTime { get; set; }
 
-        public void RechargeAccumulator (float amountToFill)
+        public void RechargeAccumulator (int rechargeTimeInHours)
         {
-            if (this.AccumulatorTimeLeft + amountToFill > this.AccumulatorMaxTime)
+            if (this.AccumulatorTimeLeft + rechargeTimeInHours > this.AccumulatorMaxTime)
             {
                 throw new Exception("you have exceeded the maximun Ampere amount");
             }
 
-            this.AccumulatorTimeLeft += amountToFill;
+            this.AccumulatorTimeLeft += rechargeTimeInHours;
         }
     }
 }

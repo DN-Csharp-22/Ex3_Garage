@@ -62,8 +62,11 @@ namespace Ex03.ConsoleUI
                         fillGasTank(garageManager);
                         break;
                     case 6:
+                        chargeElectricCar(garageManager);
                         break;
                     case 7:
+                        displayVehicleFullData(garageManager);
+                        break;
                     default:
                         throw new ArgumentException("Invalid action number was chosen");
                 }
@@ -76,7 +79,7 @@ namespace Ex03.ConsoleUI
             string carLicenseNumber = InputUtils.GetUserInput("Please insert your car license number");
         }
 
-        private static void fillGasTank(GarageManager garageManager)
+        public static void fillGasTank(GarageManager garageManager)
         {
             List<Vehicle> currentVehiclesInGarage = garageManager.getCurrentVehiclesInGarage();
 
@@ -88,20 +91,20 @@ namespace Ex03.ConsoleUI
                 {
                     string carLicenseNumber = getVehicleLicenseNumber(garageManager);
 
-                    string changeStatusOptionInput = InputUtils.GetUserInput("Please choose Gas type :\n1. Octan95\n2. Octan96\n3. Octan98\n 4. Soler");
+                    string gasOptionInput = InputUtils.GetUserInput("Please choose Gas type :\n1. Octan95\n2. Octan96\n3. Octan98\n 4. Soler");
 
                     //TODO validate that the amount is a valid positive integer===> Yuval : ***i did it look at line 252**
                     int gasAmountToFill = getGasAmountToFill();
 
-                    if (int.TryParse(changeStatusOptionInput, out int changeStatusOption))
+                    if (int.TryParse(gasOptionInput, out int gasToFill))
                     {
-                        switch (changeStatusOption - 1)
+                        switch (gasToFill - 1)
                         {
                             case (int)GasType.Octan95:
                             case (int)GasType.Octan96:
                             case (int)GasType.Octan98:
                             case (int)GasType.Soler:
-                                garageManager.FillGasTank(carLicenseNumber, (GasType)(changeStatusOption - 1), gasAmountToFill);
+                                garageManager.FillGasTank(carLicenseNumber, (GasType)(gasToFill - 1), gasAmountToFill);
                                 isInputValid = true;
                                 break;
                             default:
@@ -121,7 +124,43 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private static void fillTiresToMaximun(GarageManager garageManager)
+        public static void chargeElectricCar(GarageManager garageManager)
+        {
+            List<Vehicle> currentVehiclesInGarage = garageManager.getCurrentVehiclesInGarage();
+
+            if (currentVehiclesInGarage.Count > 0)
+            {
+                bool isInputValid = false;
+
+                while (!isInputValid)
+                {
+                    string carLicenseNumber = getVehicleLicenseNumber(garageManager);
+
+                    string chargeTimeInMinutesInput = InputUtils.GetUserInput("Please enter charging time in Minutes");
+
+                    if (int.TryParse(chargeTimeInMinutesInput, out int chargeTimeInMinutes))
+                    {
+                        if (chargeTimeInMinutes >= 0)  // check if input is valid positive intager
+                        {
+                            garageManager.chargingElectricMotor(carLicenseNumber, chargeTimeInMinutes);
+                            isInputValid = true;
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("chreging input must be a valid integer, please try again");
+
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("No vehicles in garage, please add first a vehicle");
+            }
+        }
+
+        public static void fillTiresToMaximun(GarageManager garageManager)
         {
             string carLicenseNumber = getVehicleLicenseNumber(garageManager);
 
@@ -248,7 +287,7 @@ namespace Ex03.ConsoleUI
             return carLicenseNumber;
         }
 
-        public static int getGasAmountToFill() //TO validate that the amount is a valid positive integer
+        public static int getGasAmountToFill() //validate that the amount is a valid positive integer
         {
             bool isValid = false;
 
@@ -274,6 +313,23 @@ namespace Ex03.ConsoleUI
                 }
             }
             return amountToFill;
+        }
+
+        public static void displayVehicleFullData(GarageManager garageManager)
+        {
+            string carLicenseNumber = null;
+
+            List<Vehicle> currentVehiclesInGarage = garageManager.getCurrentVehiclesInGarage();
+
+            if (currentVehiclesInGarage.Count > 0)
+            {
+                carLicenseNumber = getVehicleLicenseNumber(garageManager);
+                garageManager.displayVehicleData(carLicenseNumber);
+            }
+            else
+            {
+                Console.WriteLine("No vehicles in garage, please add first a vehicle");
+            }
         }
     }
 }
