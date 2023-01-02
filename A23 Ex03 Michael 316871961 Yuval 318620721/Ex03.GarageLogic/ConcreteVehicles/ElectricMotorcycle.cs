@@ -40,5 +40,16 @@ namespace Ex03.GarageLogic
 
             return result;
         }
+
+        public string GetVehicleInformation()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine(base.GetVehicleInformation());
+
+            sb.AppendLine(string.Format("License type : {0}", this.licenseType.ToString()));
+
+            return sb.ToString();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Ex03.GarageLogic
 {
@@ -49,6 +50,18 @@ namespace Ex03.GarageLogic
             }
 
             return result;
+        }
+
+        public string GetVehicleInformation()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine(base.GetVehicleInformation());
+
+            sb.AppendLine(string.Format("Car color : {0}", this.carColor.ToString()));
+            sb.AppendLine(string.Format("Door amount : {0}", this.doorAmount.ToString()));
+
+            return sb.ToString();
         }
     }
 }

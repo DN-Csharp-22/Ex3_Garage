@@ -12,13 +12,15 @@ namespace Ex03.ConsoleUI
             StartGarageManager();
         }
 
-        public static void StartGarageManager()
+        private static void StartGarageManager()
         {
+            GarageManager garageManager = new GarageManager();
+
             while (true)
             {
                 try
                 {
-                    StartGarageAction();
+                    StartGarageAction(garageManager);
                 }
                 catch (FormatException fex)
                 {
@@ -35,11 +37,9 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public static void StartGarageAction()
+        private static void StartGarageAction(GarageManager garageManager)
         {
             string actionNumberInput = GetActionNumber();
-
-            GarageManager garageManager = new GarageManager();
 
             if (int.TryParse(actionNumberInput, out int actionNumber))
             {
@@ -69,16 +69,16 @@ namespace Ex03.ConsoleUI
                     default:
                         throw new ArgumentException("Invalid action number was chosen");
                 }
+                Console.Clear();
+                Console.WriteLine(">>> Command has been finished successfully\n");
             }
             else
             {
                 throw new FormatException("Action string must be a valid integer - one from the given options");
             }
-
-            string carLicenseNumber = InputUtils.GetUserInput("Please insert your car license number");
         }
 
-        public static void addVehicleToGarage(GarageManager garageManager)
+        private static void addVehicleToGarage(GarageManager garageManager)
         {
             string carLicenseNumber = InputUtils.GetUserInput("Please insert your car license number");
 
@@ -99,7 +99,10 @@ namespace Ex03.ConsoleUI
                     inputValues.Add(key, input);
                 }
 
-                garageManager.createVehicle(vehicleType, carLicenseNumber, inputValues);
+                inputValues["IdNumber"] = carLicenseNumber;
+
+
+                garageManager.createVehicle(vehicleType, inputValues);
             }
             else
             {
@@ -118,7 +121,7 @@ namespace Ex03.ConsoleUI
             return GarageManager.ALLOWED_VEHICLES_DICTIONARY[vehicleType.ToString()];
         }
 
-        public static void fillGasTank(GarageManager garageManager)
+        private static void fillGasTank(GarageManager garageManager)
         {
             List<Vehicle> currentVehiclesInGarage = garageManager.getCurrentVehiclesInGarage();
 
@@ -162,7 +165,7 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public static void chargeElectricCar(GarageManager garageManager)
+        private static void chargeElectricCar(GarageManager garageManager)
         {
             List<Vehicle> currentVehiclesInGarage = garageManager.getCurrentVehiclesInGarage();
 
@@ -200,14 +203,14 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public static void fillTiresToMaximun(GarageManager garageManager)
+        private static void fillTiresToMaximun(GarageManager garageManager)
         {
             string carLicenseNumber = getVehicleLicenseNumberForUpdate(garageManager);
 
             garageManager.fillTires(carLicenseNumber);
         }
 
-        public static void changeCarStatus(GarageManager garageManager)
+        private static void changeCarStatus(GarageManager garageManager)
         {
             bool isInputValid = false;
 
@@ -248,7 +251,7 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public static string GetActionNumber()
+        private static string GetActionNumber()
         {
             Console.WriteLine(@"Hello please choose on of the following options :
     1. Add new vehicle
@@ -264,7 +267,7 @@ namespace Ex03.ConsoleUI
             return actionNumber;
         }
 
-        public static void displayGarageCars(GarageManager garageManager)
+        private static void displayGarageCars(GarageManager garageManager)
         {
             List<Vehicle> listOfVehiclesAtGarage = garageManager.getCurrentVehiclesInGarage();
 
@@ -307,7 +310,7 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public static string getVehicleLicenseNumberForUpdate(GarageManager garageManager, bool isVehicleMUstBeInGarage = true)
+        private static string getVehicleLicenseNumberForUpdate(GarageManager garageManager, bool isVehicleMUstBeInGarage = true)
         {
             string carLicenseNumber = InputUtils.GetUserInput("Please insert your car license number");
 
@@ -325,7 +328,7 @@ namespace Ex03.ConsoleUI
             return carLicenseNumber;
         }
 
-        public static int getGasAmountToFill()
+        private static int getGasAmountToFill()
         {
             bool isValid = false;
 
@@ -351,16 +354,15 @@ namespace Ex03.ConsoleUI
             return amountToFill;
         }
 
-        public static void displayVehicleFullData(GarageManager garageManager)
+        private static void displayVehicleFullData(GarageManager garageManager)
         {
-            string carLicenseNumber = null;
-
             List<Vehicle> currentVehiclesInGarage = garageManager.getCurrentVehiclesInGarage();
 
             if (currentVehiclesInGarage.Count > 0)
             {
-                carLicenseNumber = getVehicleLicenseNumberForUpdate(garageManager);
-                garageManager.displayVehicleData(carLicenseNumber);
+                string carLicenseNumber = getVehicleLicenseNumberForUpdate(garageManager);
+                Console.WriteLine(garageManager.displayVehicleData(carLicenseNumber));
+                Console.ReadKey();
             }
             else
             {

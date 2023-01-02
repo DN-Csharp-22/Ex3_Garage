@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Ex03.GarageLogic
 {
@@ -46,6 +47,17 @@ namespace Ex03.GarageLogic
                     throw new ArgumentException("Invalid max tire pressure amount was inserted");
                 }
             }
+        }
+
+        public string GetVehicleInformation()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine(string.Format("ManufacturerName : {0}", this.ManufacturerName));
+            sb.AppendLine(string.Format("CurrentPressure : {0}", this.CurrentPressure));
+            sb.AppendLine(string.Format("MaxPressure : {0}", this.MaxPressure));
+
+            return sb.ToString();
         }
 
         public void FillTirePressure(float pressureToFill)

@@ -57,5 +57,17 @@ namespace Ex03.GarageLogic
 
             return result;
         }
+
+        public string GetVehicleInformation()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine(base.GetVehicleInformation());
+
+            sb.AppendLine(string.Format("Is Moving Dangerous Materials : {0}", this.isMovingDangerousMaterials.ToString()));
+            sb.AppendLine(string.Format("Cargo volume : {0}", this.cargoVolume.ToString()));
+
+            return sb.ToString();
+        }
     }
 }

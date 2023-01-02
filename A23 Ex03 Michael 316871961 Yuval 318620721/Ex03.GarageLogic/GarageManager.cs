@@ -23,13 +23,13 @@ namespace Ex03.GarageLogic
             this.VehiclesInGarage = new Dictionary<string, Vehicle>();
         }
 
-        public void createVehicle(Type vehicleType, string id, Dictionary<string, string> inputValues)
+        public void createVehicle(Type vehicleType, Dictionary<string, string> inputValues)
         {
             VehicleFactory vehicleFactory = new VehicleFactory();
 
-            Vehicle newVehicle = vehicleFactory.CreateVehicle(vehicleType, id, inputValues);
+            Vehicle newVehicle = vehicleFactory.CreateVehicle(vehicleType, inputValues);
 
-            VehiclesInGarage.Add(id, newVehicle);
+            VehiclesInGarage.Add(inputValues["IdNumber"], newVehicle);
         }
 
         public List<Vehicle> getCurrentVehiclesInGarage()
@@ -110,19 +110,14 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void displayVehicleData(string carLicenseNumber)
+        public string displayVehicleData(string carLicenseNumber)
         {
-            Vehicle currentVehicle = VehiclesInGarage[carLicenseNumber];
-            Console.WriteLine("Model type is " + currentVehicle.Model);
-            Console.WriteLine("license number is " + currentVehicle.IdNumber);
-            Console.WriteLine("vehicle garage status is " + currentVehicle.vehicleStatus);
-            Console.WriteLine("vehicle energy status is " + currentVehicle.AmountOfEnergyLeft);
-            foreach (Wheel wheel in currentVehicle.wheels)
-            {
-                Console.WriteLine("wheels Manufacturer Name is " + wheel.ManufacturerName);
-                Console.WriteLine("wheels Maximum Pressure is " + wheel.CurrentPressure);
-                break;
-            }
+            object currentVehicle = VehiclesInGarage[carLicenseNumber];
+            Type t = currentVehicle.GetType();
+
+            object b = Convert.ChangeType(VehiclesInGarage[carLicenseNumber], VehiclesInGarage[carLicenseNumber].GetType());
+
+            return (Vehicle)b.GetVehicleInformation();
         }
     }
 }

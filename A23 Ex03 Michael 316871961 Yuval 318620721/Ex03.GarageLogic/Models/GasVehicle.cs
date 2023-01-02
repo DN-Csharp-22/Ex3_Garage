@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Ex03.GarageLogic
 {
@@ -59,6 +61,18 @@ namespace Ex03.GarageLogic
             }
 
             return result;
+        }
+
+        public string GetVehicleInformation()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine(base.GetVehicleInformation());
+
+            sb.AppendLine(string.Format("Gas type : {0}", this.gasType.ToString()));
+            sb.AppendLine(string.Format("MaxFuelAmount : {0}", this.MaxFuelAmount));
+
+            return sb.ToString();
         }
     }
 }

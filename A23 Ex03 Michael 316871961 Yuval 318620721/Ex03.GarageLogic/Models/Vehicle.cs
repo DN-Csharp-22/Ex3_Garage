@@ -30,6 +30,7 @@ namespace Ex03.GarageLogic
             if (inputValues != null)
             {
                 this.Model = inputValues["Model"];
+                this.IdNumber = inputValues["IdNumber"];
 
                 if (float.TryParse(inputValues["AmountOfEnergyLeft"], out float amountOfEnergyLeftInput))
                 {
@@ -66,6 +67,19 @@ namespace Ex03.GarageLogic
             }
 
             return result;
+        }
+
+        public string GetVehicleInformation()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine(string.Format("IdNumber : {0}", this.IdNumber));
+            sb.AppendLine(string.Format("Model : {0}", this.Model));
+            sb.AppendLine(string.Format("AmountOfEnergyLeft : {0}", this.AmountOfEnergyLeft));
+            sb.AppendLine(string.Format("Wheel amount : {0}", this.wheels.Count));
+            sb.AppendLine(string.Format("Wheel information : {0}", wheels.FirstOrDefault().GetVehicleInformation()));
+
+            return sb.ToString();
         }
     }
 }

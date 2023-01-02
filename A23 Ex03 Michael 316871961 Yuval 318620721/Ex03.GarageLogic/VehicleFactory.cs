@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
 {
     internal class VehicleFactory
     {
-        public Vehicle CreateVehicle(Type vehicleType, string id, Dictionary<string, string> inputValues)
+        public Vehicle CreateVehicle(Type vehicleType, Dictionary<string, string> inputValues)
         {
             Vehicle result = null;
 
