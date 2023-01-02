@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -6,18 +7,58 @@ namespace Ex03.GarageLogic
     {
         public GasType gasType { get; set; }
 
-        public float CurrentFuelAmount { get; set; }
-
         public float MaxFuelAmount { get; set; }
+
+        protected new readonly Dictionary<string, string> inputMessages = new Dictionary<string, string>()
+        {
+            { "gasType", string.Format("Please insert gas type out of : \n{0}", InputParameterUtils.GetEnumInputString(typeof(GasType))) },
+            { "MaxFuelAmount", "Please insert max fuel amount" }
+        };
+
+        public GasVehicle(Dictionary<string, string> inputValues) : base(inputValues)
+        {
+            if (inputValues != null)
+            {
+                if (int.TryParse(inputValues["gasType"], out int gasTypeInput) && Enum.IsDefined(typeof(GasType), gasTypeInput))
+                {
+                    this.gasType = (GasType)gasTypeInput;
+
+                    if (float.TryParse(inputValues["MaxFuelAmount"], out float maxFuelAmountInput))
+                    {
+                        this.MaxFuelAmount = maxFuelAmountInput;
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Invalid max fuel amount was inserted");
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("Invalid gas type input");
+                }
+            }
+        }
 
         public void FillGas(float amountToFill)
         {
-            if (this.CurrentFuelAmount + amountToFill > this.MaxFuelAmount)
+            if (this.AmountOfEnergyLeft + amountToFill > this.MaxFuelAmount)
             {
                 throw new Exception("you have exceeded the maximun Ampere amount");
             }
 
-            this.CurrentFuelAmount += amountToFill;
+            this.AmountOfEnergyLeft += amountToFill;
+        }
+
+        public new Dictionary<string, string> GetInputMessages()
+        {
+            Dictionary<string, string> result = base.GetInputMessages();
+
+            foreach (string key in inputMessages.Keys)
+            {
+                result.Add(key, inputMessages[key]);
+            }
+
+            return result;
         }
     }
 }

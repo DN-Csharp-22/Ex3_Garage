@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,30 +7,53 @@ namespace Ex03.GarageLogic
 {
     public class GarageManager
     {
-        public List<string> allowedVehicles { get; set; }
+        public static readonly Dictionary<string, Type> ALLOWED_VEHICLES_DICTIONARY = new Dictionary<string, Type> 
+        {
+            { "1", typeof(GasCar) },
+            { "2", typeof(ElectricCar) },
+            { "3", typeof(GasMotorcycle) },
+            { "4", typeof(ElectricMotorcycle) },
+            { "5", typeof(Truck) }
+        };
 
         private Dictionary<string, Vehicle> VehiclesInGarage { get; set; }
+
+        public GarageManager()
+        {
+            this.VehiclesInGarage = new Dictionary<string, Vehicle>();
+        }
+
+        public void createVehicle(Type vehicleType, string id, Dictionary<string, string> inputValues)
+        {
+            VehicleFactory vehicleFactory = new VehicleFactory();
+
+            Vehicle newVehicle = vehicleFactory.CreateVehicle(vehicleType, id, inputValues);
+
+            VehiclesInGarage.Add(id, newVehicle);
+        }
 
         public List<Vehicle> getCurrentVehiclesInGarage()
         {
             List<Vehicle> result = VehiclesInGarage.Values.ToList();
+            return result;
+        }
+
+        public Vehicle GetVehicle(string id)
+        {
+            KeyValuePair<string, Vehicle> foundVehicle = VehiclesInGarage.Where(vehicle => vehicle.Value.IdNumber == id.ToLower()).FirstOrDefault();
+
+            Vehicle result = foundVehicle.Value;
 
             return result;
         }
-        public Vehicle createVehicle(string vehicleType)
+
+        public Dictionary<string, string> getVehicleInputMessages(Type vehicleType)
         {
-            if (!allowedVehicles.Contains(vehicleType))
-            {
-                throw new Exception("unsupported vehicle");
+            VehicleFactory vehicleFactory = new VehicleFactory();
 
-            }
+            Dictionary<string, string> inputMessages = vehicleFactory.GetInputMessages(vehicleType);
 
-            switch (vehicleType)
-            {
-                default:
-                    break;
-            }
-            return null;
+            return inputMessages;
         }
 
         public void updateVehicleStatus(string carLicenseNumber, VehicleStatus changeStatusOptionInput)
@@ -53,8 +77,7 @@ namespace Ex03.GarageLogic
 
             ElectricCar electricCar = (ElectricCar)VehiclesInGarage[carLicenseNumber];
 
-            electricCar.RechargeAccumulator(chargeTimeInHours);
-
+            electricCar.RechargeBattery(chargeTimeInHours);
         }
 
         public void FillGasTank(string carLicenseNumber, GasType gasType, int amountToFill)

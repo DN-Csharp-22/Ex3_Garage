@@ -45,6 +45,7 @@
     <Compile Include="Enums\DoorAmount.cs" />
     <Compile Include="ConcreteVehicles\ElectricCar.cs" />
     <Compile Include="ConcreteVehicles\ElectricMotorcycle.cs" />
+    <Compile Include="InputParameterUtils.cs" />
     <Compile Include="Models\ElectricVehicle.cs" />
     <Compile Include="ConcreteVehicles\GasCar.cs" />
     <Compile Include="ConcreteVehicles\GasMotorcycle.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="GarageManager.cs" />
     <Compile Include="Enums\VehicleStatus.cs" />
     <Compile Include="Models\Wheel.cs" />
+    <Compile Include="VehicleFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
