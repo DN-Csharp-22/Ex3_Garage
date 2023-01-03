@@ -25,16 +25,16 @@ namespace Ex03.GarageLogic
             { "WheelsAmount", "Please insert vehicle wheels amount" },
         };
 
-        public Vehicle(Dictionary<string, string> inputValues)
+        public Vehicle(Dictionary<string, string> i_inputValues)
         {
-            if (inputValues != null)
+            if (i_inputValues != null)
             {
-                this.Model = inputValues["Model"];
-                this.IdNumber = inputValues["IdNumber"];
+                this.Model = i_inputValues["Model"];
+                this.IdNumber = i_inputValues["IdNumber"];
 
-                if (float.TryParse(inputValues["AmountOfEnergyLeft"], out float amountOfEnergyLeftInput))
+                if (float.TryParse(i_inputValues["AmountOfEnergyLeft"], out float o_amountOfEnergyLeftInput))
                 {
-                    this.AmountOfEnergyLeft = amountOfEnergyLeftInput;
+                    this.AmountOfEnergyLeft = o_amountOfEnergyLeftInput;
                 }
                 else
                 {
@@ -43,11 +43,11 @@ namespace Ex03.GarageLogic
 
                 this.wheels = new List<Wheel>();
 
-                if (int.TryParse(inputValues["WheelsAmount"], out int wheelsAmount))
+                if (int.TryParse(i_inputValues["WheelsAmount"], out int o_wheelsAmount))
                 {
-                    for (int i = 0; i < wheelsAmount; i++)
+                    for (int i = 0; i < o_wheelsAmount; i++)
                     {
-                        this.wheels.Add(new Wheel(inputValues));
+                        this.wheels.Add(new Wheel(i_inputValues));
                     }
                 }
                 else

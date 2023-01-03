@@ -17,17 +17,17 @@ namespace Ex03.GarageLogic
             { "MaxFuelAmount", "Please insert max fuel amount" }
         };
 
-        public GasVehicle(Dictionary<string, string> inputValues) : base(inputValues)
+        public GasVehicle(Dictionary<string, string> i_inputValues) : base(i_inputValues)
         {
-            if (inputValues != null)
+            if (i_inputValues != null)
             {
-                if (int.TryParse(inputValues["gasType"], out int gasTypeInput) && Enum.IsDefined(typeof(GasType), gasTypeInput - 1))
+                if (int.TryParse(i_inputValues["gasType"], out int o_gasTypeInput) && Enum.IsDefined(typeof(GasType), o_gasTypeInput - 1))
                 {
-                    this.gasType = (GasType)gasTypeInput;
+                    this.gasType = (GasType)o_gasTypeInput;
 
-                    if (float.TryParse(inputValues["MaxFuelAmount"], out float maxFuelAmountInput))
+                    if (float.TryParse(i_inputValues["MaxFuelAmount"], out float o_maxFuelAmountInput))
                     {
-                        this.MaxFuelAmount = maxFuelAmountInput;
+                        this.MaxFuelAmount = o_maxFuelAmountInput;
                     }
                     else
                     {
@@ -53,14 +53,14 @@ namespace Ex03.GarageLogic
             return result;
         }
 
-        public void FillGas(float amountToFill)
+        public void FillGas(float i_amountToFill)
         {
-            if (this.AmountOfEnergyLeft + amountToFill > this.MaxFuelAmount)
+            if (this.AmountOfEnergyLeft + i_amountToFill > this.MaxFuelAmount)
             {
                 throw new Exception("you have exceeded the maximun Ampere amount");
             }
 
-            this.AmountOfEnergyLeft += amountToFill;
+            this.AmountOfEnergyLeft += i_amountToFill;
         }
 
         public override string GetVehicleInformation()

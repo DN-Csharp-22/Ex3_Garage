@@ -17,26 +17,26 @@ namespace Ex03.GarageLogic
             { "5", typeof(Truck) }
         };
 
-        public Vehicle CreateVehicle(Type vehicleType, Dictionary<string, string> inputValues)
+        public Vehicle CreateVehicle(Type i_vehicleType, Dictionary<string, string> i_inputValues)
         {
             Vehicle result = null;
 
-            switch (vehicleType.Name)
+            switch (i_vehicleType.Name)
             {
                 case nameof(GasCar):
-                    result = new GasCar(inputValues);
+                    result = new GasCar(i_inputValues);
                     break;
                 case nameof(ElectricCar):
-                    result = new ElectricCar(inputValues);
+                    result = new ElectricCar(i_inputValues);
                     break;
                 case nameof(GasMotorcycle):
-                    result = new GasMotorcycle(inputValues);
+                    result = new GasMotorcycle(i_inputValues);
                     break;
                 case nameof(ElectricMotorcycle):
-                    result = new ElectricMotorcycle(inputValues);
+                    result = new ElectricMotorcycle(i_inputValues);
                     break;
                 case nameof(Truck):
-                    result = new Truck(inputValues);
+                    result = new Truck(i_inputValues);
                     break;
                 default:
                     throw new Exception("unsupported vehicle");
@@ -45,11 +45,11 @@ namespace Ex03.GarageLogic
             return result;
         }
 
-        public Dictionary<string, string> GetInputMessages(Type vehicleType)
+        public Dictionary<string, string> GetInputMessages(Type i_vehicleType)
         {
             Dictionary<string, string> inputMessages = null;
 
-            switch (vehicleType.Name)
+            switch (i_vehicleType.Name)
             {
                 case nameof(GasCar):
                     inputMessages = GasCar.GetInputMessages();

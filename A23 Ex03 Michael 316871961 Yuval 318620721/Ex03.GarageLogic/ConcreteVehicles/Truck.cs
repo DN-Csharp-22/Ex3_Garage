@@ -18,15 +18,15 @@ namespace Ex03.GarageLogic
             { "cargoVolume", "Please insert cargo volume" },
         };
 
-        public Truck(Dictionary<string, string> inputValues = null) : base(inputValues)
+        public Truck(Dictionary<string, string> i_inputValues = null) : base(i_inputValues)
         {
-            if (inputValues != null)
+            if (i_inputValues != null)
             {
-                if (inputValues["isMovingDangerousMaterials"].ToLower() == "yes")
+                if (i_inputValues["isMovingDangerousMaterials"].ToLower() == "yes")
                 {
                     this.isMovingDangerousMaterials = true;
                 }
-                else if (inputValues["isMovingDangerousMaterials"].ToLower() == "no")
+                else if (i_inputValues["isMovingDangerousMaterials"].ToLower() == "no")
                 {
                     this.isMovingDangerousMaterials = false;
                 }
@@ -35,9 +35,9 @@ namespace Ex03.GarageLogic
                     throw new ArgumentException("Invalid parameter value : truck moving dangerous metrials must be yes/no");
                 }
 
-                if (float.TryParse(inputValues["cargoVolume"], out float cargoVolumeInput))
+                if (float.TryParse(i_inputValues["cargoVolume"], out float o_cargoVolumeInput))
                 {
-                    this.cargoVolume = cargoVolumeInput;
+                    this.cargoVolume = o_cargoVolumeInput;
                 }
                 else
                 {

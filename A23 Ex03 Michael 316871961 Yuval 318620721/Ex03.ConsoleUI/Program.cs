@@ -37,34 +37,34 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private static void StartGarageAction(GarageManager garageManager)
+        private static void StartGarageAction(GarageManager io_garageManager)
         {
             string actionNumberInput = GetActionNumber();
 
-            if (int.TryParse(actionNumberInput, out int actionNumber))
+            if (int.TryParse(actionNumberInput, out int o_actionNumber))
             {
-                switch (actionNumber)
+                switch (o_actionNumber)
                 {
                     case 1:
-                        addVehicleToGarage(garageManager);
+                        addVehicleToGarage(io_garageManager);
                         break;
                     case 2:
-                        displayGarageCars(garageManager);
+                        displayGarageCars(io_garageManager);
                         break;
                     case 3:
-                        changeCarStatus(garageManager);
+                        changeCarStatus(io_garageManager);
                         break;
                     case 4:
-                        fillTiresToMaximun(garageManager);
+                        fillTiresToMaximun(io_garageManager);
                         break;
                     case 5:
-                        fillGasTank(garageManager);
+                        fillGasTank(io_garageManager);
                         break;
                     case 6:
-                        chargeElectricCar(garageManager);
+                        chargeElectricCar(io_garageManager);
                         break;
                     case 7:
-                        displayVehicleFullData(garageManager);
+                        displayVehicleFullData(io_garageManager);
                         break;
                     default:
                         throw new ArgumentException("Invalid action number was chosen");
@@ -79,17 +79,17 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private static void addVehicleToGarage(GarageManager garageManager)
+        private static void addVehicleToGarage(GarageManager io_garageManager)
         {
             string carLicenseNumber = InputUtils.GetUserInput("Please insert your car license number");
 
-            Vehicle currentVehicle = garageManager.GetVehicle(carLicenseNumber);
+            Vehicle currentVehicle = io_garageManager.GetVehicle(carLicenseNumber);
 
             if (currentVehicle == null)
             {
-                Type vehicleType = GetVehicleType(garageManager);
+                Type vehicleType = GetVehicleType(io_garageManager);
 
-                Dictionary<string, string> inputMessages = garageManager.getVehicleInputMessages(vehicleType);
+                Dictionary<string, string> inputMessages = io_garageManager.getVehicleInputMessages(vehicleType);
 
                 Dictionary<string, string> inputValues = new Dictionary<string, string>();
 
@@ -102,17 +102,17 @@ namespace Ex03.ConsoleUI
 
                 inputValues["IdNumber"] = carLicenseNumber;
 
-                garageManager.createVehicle(vehicleType, inputValues);
+                io_garageManager.createVehicle(vehicleType, inputValues);
             }
             else
             {
-                garageManager.updateVehicleStatus(carLicenseNumber, VehicleStatus.InService);
+                io_garageManager.updateVehicleStatus(carLicenseNumber, VehicleStatus.InService);
             }
         }
 
-        private static Type GetVehicleType(GarageManager garageManager)
+        private static Type GetVehicleType(GarageManager io_garageManager)
         {
-            Dictionary<string, Type> allowedVehicles = garageManager.GetAllowedVehicles();
+            Dictionary<string, Type> allowedVehicles = io_garageManager.GetAllowedVehicles();
 
             List<string> numberedAllowedVehicleList = allowedVehicles.Select((type, index) => $"{(index + 1).ToString()}. {type.Value.Name}").ToList();
 
@@ -123,9 +123,9 @@ namespace Ex03.ConsoleUI
             return allowedVehicles[vehicleType.ToString()];
         }
 
-        private static void fillGasTank(GarageManager garageManager)
+        private static void fillGasTank(GarageManager io_garageManager)
         {
-            List<Vehicle> currentVehiclesInGarage = garageManager.getCurrentVehiclesInGarage();
+            List<Vehicle> currentVehiclesInGarage = io_garageManager.getCurrentVehiclesInGarage();
 
             if (currentVehiclesInGarage.Count > 0)
             {
@@ -133,21 +133,21 @@ namespace Ex03.ConsoleUI
 
                 while (!isInputValid)
                 {
-                    string carLicenseNumber = getVehicleLicenseNumberForUpdate(garageManager);
+                    string carLicenseNumber = getVehicleLicenseNumberForUpdate(io_garageManager);
 
                     string gasOptionInput = InputUtils.GetUserInput("Please choose Gas type :\n1. Octan95\n2. Octan96\n3. Octan98\n 4. Soler");
 
                     int gasAmountToFill = getGasAmountToFill();
 
-                    if (int.TryParse(gasOptionInput, out int gasToFill))
+                    if (int.TryParse(gasOptionInput, out int o_gasToFill))
                     {
-                        switch (gasToFill - 1)
+                        switch (o_gasToFill - 1)
                         {
                             case (int)GasType.Octan95:
                             case (int)GasType.Octan96:
                             case (int)GasType.Octan98:
                             case (int)GasType.Soler:
-                                garageManager.FillGasTank(carLicenseNumber, (GasType)(gasToFill - 1), gasAmountToFill);
+                                io_garageManager.FillGasTank(carLicenseNumber, (GasType)(o_gasToFill - 1), gasAmountToFill);
                                 isInputValid = true;
                                 break;
                             default:
@@ -167,9 +167,9 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private static void chargeElectricCar(GarageManager garageManager)
+        private static void chargeElectricCar(GarageManager io_garageManager)
         {
-            List<Vehicle> currentVehiclesInGarage = garageManager.getCurrentVehiclesInGarage();
+            List<Vehicle> currentVehiclesInGarage = io_garageManager.getCurrentVehiclesInGarage();
 
             if (currentVehiclesInGarage.Count > 0)
             {
@@ -177,15 +177,15 @@ namespace Ex03.ConsoleUI
 
                 while (!isInputValid)
                 {
-                    string carLicenseNumber = getVehicleLicenseNumberForUpdate(garageManager);
+                    string carLicenseNumber = getVehicleLicenseNumberForUpdate(io_garageManager);
 
                     string chargeTimeInMinutesInput = InputUtils.GetUserInput("Please enter charging time in Minutes");
 
-                    if (int.TryParse(chargeTimeInMinutesInput, out int chargeTimeInMinutes))
+                    if (int.TryParse(chargeTimeInMinutesInput, out int o_chargeTimeInMinutes))
                     {
-                        if (chargeTimeInMinutes >= 0)
+                        if (o_chargeTimeInMinutes >= 0)
                         {
-                            garageManager.chargingElectricMotor(carLicenseNumber, chargeTimeInMinutes);
+                            io_garageManager.chargingElectricMotor(carLicenseNumber, o_chargeTimeInMinutes);
                             isInputValid = true;
                         }
                         else
@@ -205,35 +205,35 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private static void fillTiresToMaximun(GarageManager garageManager)
+        private static void fillTiresToMaximun(GarageManager io_garageManager)
         {
-            string carLicenseNumber = getVehicleLicenseNumberForUpdate(garageManager);
+            string carLicenseNumber = getVehicleLicenseNumberForUpdate(io_garageManager);
 
-            garageManager.fillTires(carLicenseNumber);
+            io_garageManager.fillTires(carLicenseNumber);
         }
 
-        private static void changeCarStatus(GarageManager garageManager)
+        private static void changeCarStatus(GarageManager io_garageManager)
         {
             bool isInputValid = false;
 
-            List<Vehicle> currentVehiclesInGarage = garageManager.getCurrentVehiclesInGarage();
+            List<Vehicle> currentVehiclesInGarage = io_garageManager.getCurrentVehiclesInGarage();
 
             if (currentVehiclesInGarage.Count > 0)
             {
                 while (!isInputValid)
                 {
-                    string carLicenseNumber = getVehicleLicenseNumberForUpdate(garageManager);
+                    string carLicenseNumber = getVehicleLicenseNumberForUpdate(io_garageManager);
 
                     string changeStatusOptionInput = InputUtils.GetUserInput("Please choose status option :\n1. InService\n2. Fixed\n3. Completed");
 
-                    if (int.TryParse(changeStatusOptionInput, out int changeStatusOption))
+                    if (int.TryParse(changeStatusOptionInput, out int o_changeStatusOption))
                     {
-                        switch (changeStatusOption - 1)
+                        switch (o_changeStatusOption - 1)
                         {
                             case (int)VehicleStatus.InService:
                             case (int)VehicleStatus.Fixed:
                             case (int)VehicleStatus.Completed:
-                                garageManager.updateVehicleStatus(carLicenseNumber, (VehicleStatus)(changeStatusOption - 1));
+                                io_garageManager.updateVehicleStatus(carLicenseNumber, (VehicleStatus)(o_changeStatusOption - 1));
                                 isInputValid = true;
                                 break;
                             default:
@@ -269,9 +269,9 @@ namespace Ex03.ConsoleUI
             return actionNumber;
         }
 
-        private static void displayGarageCars(GarageManager garageManager)
+        private static void displayGarageCars(GarageManager io_garageManager)
         {
-            List<Vehicle> listOfVehiclesAtGarage = garageManager.getCurrentVehiclesInGarage();
+            List<Vehicle> listOfVehiclesAtGarage = io_garageManager.getCurrentVehiclesInGarage();
 
             List<string> listOfVehicleIds = listOfVehiclesAtGarage.Select(vehicle => vehicle.IdNumber).ToList();
 
@@ -286,15 +286,15 @@ namespace Ex03.ConsoleUI
             {
                 string filterOptionInput = InputUtils.GetUserInput("Filter list of vehicles :\n1. InService\n2. Fixed\n3. Completed\n4. No filltering");
 
-                if (int.TryParse(filterOptionInput, out int filterOption))
+                if (int.TryParse(filterOptionInput, out int o_filterOption))
                 {
-                    switch (filterOption - 1)
+                    switch (o_filterOption - 1)
                     {
                         case (int)VehicleStatus.InService:
                         case (int)VehicleStatus.Fixed:
                         case (int)VehicleStatus.Completed:
                             listOfVehicleIds = listOfVehiclesAtGarage
-                                .Where(vechile => vechile.vehicleStatus == (VehicleStatus)(filterOption - 1))
+                                .Where(vechile => vechile.vehicleStatus == (VehicleStatus)(o_filterOption - 1))
                                 .Select(vehicle => string.Format("{0} : {1} : {2}", vehicle.GetType().Name, vehicle.IdNumber, vehicle.vehicleStatus.ToString())).ToList();
                             Console.WriteLine(string.Format("Filtered vehicles are :\n{0}", string.Join("\n", listOfVehicleIds)));
                             Console.ReadKey();
@@ -315,13 +315,13 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private static string getVehicleLicenseNumberForUpdate(GarageManager garageManager, bool isVehicleMUstBeInGarage = true)
+        private static string getVehicleLicenseNumberForUpdate(GarageManager io_garageManager, bool isVehicleMUstBeInGarage = true)
         {
             string carLicenseNumber = InputUtils.GetUserInput("Please insert your car license number");
 
             if (isVehicleMUstBeInGarage)
             {
-                List<Vehicle> currentVehiclesInGarage = garageManager.getCurrentVehiclesInGarage();
+                List<Vehicle> currentVehiclesInGarage = io_garageManager.getCurrentVehiclesInGarage();
 
                 while (!currentVehiclesInGarage.Any(vehicle => vehicle.IdNumber == carLicenseNumber))
                 {
@@ -337,15 +337,15 @@ namespace Ex03.ConsoleUI
         {
             bool isValid = false;
 
-            int amountToFill = 0;
+            int o_amountToFill = 0;
 
             while (!isValid)
             {
                 string amountToFillInput = InputUtils.GetUserInput("Please insert amount of gas to fill");
 
-                if (int.TryParse(amountToFillInput, out amountToFill))
+                if (int.TryParse(amountToFillInput, out o_amountToFill))
                 {
-                    if (amountToFill >= 0)
+                    if (o_amountToFill >= 0)
                     {
                         isValid = true;
                     }
@@ -356,17 +356,17 @@ namespace Ex03.ConsoleUI
                 }
             }
 
-            return amountToFill;
+            return o_amountToFill;
         }
 
-        private static void displayVehicleFullData(GarageManager garageManager)
+        private static void displayVehicleFullData(GarageManager io_garageManager)
         {
-            List<Vehicle> currentVehiclesInGarage = garageManager.getCurrentVehiclesInGarage();
+            List<Vehicle> currentVehiclesInGarage = io_garageManager.getCurrentVehiclesInGarage();
 
             if (currentVehiclesInGarage.Count > 0)
             {
-                string carLicenseNumber = getVehicleLicenseNumberForUpdate(garageManager);
-                Console.WriteLine(garageManager.displayVehicleData(carLicenseNumber));
+                string carLicenseNumber = getVehicleLicenseNumberForUpdate(io_garageManager);
+                Console.WriteLine(io_garageManager.displayVehicleData(carLicenseNumber));
                 Console.ReadKey();
             }
             else

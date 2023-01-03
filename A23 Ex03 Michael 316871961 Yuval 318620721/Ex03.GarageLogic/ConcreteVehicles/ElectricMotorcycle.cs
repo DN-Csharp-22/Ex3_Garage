@@ -14,13 +14,13 @@ namespace Ex03.GarageLogic
            { "licenseType", string.Format("Please insert motorcycle license type out of : \n{0}", InputParameterUtils.GetEnumInputString(typeof(LicenseType))) },
         };
 
-        public ElectricMotorcycle(Dictionary<string, string> inputValues = null) : base(inputValues)
+        public ElectricMotorcycle(Dictionary<string, string> i_inputValues = null) : base(i_inputValues)
         {
-            if (inputValues != null)
+            if (i_inputValues != null)
             {
-                if (int.TryParse(inputValues["licenseType"], out int licenseTypeInput) && Enum.IsDefined(typeof(LicenseType), licenseTypeInput - 1))
+                if (int.TryParse(i_inputValues["licenseType"], out int o_licenseTypeInput) && Enum.IsDefined(typeof(LicenseType), o_licenseTypeInput - 1))
                 { 
-                    this.licenseType = (LicenseType)licenseTypeInput;
+                    this.licenseType = (LicenseType)o_licenseTypeInput;
                 }
                 else
                 {

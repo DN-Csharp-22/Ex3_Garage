@@ -8,21 +8,21 @@ namespace Ex03.GarageLogic
 {
     internal class InputParameterUtils
     {
-        public static string GetEnumInputString(Type type)
+        public static string GetEnumInputString(Type i_type)
         {
-            List<string> indexedEnumOptions = Enum.GetNames(type).Select((enumOption, index) => $"{(index + 1).ToString()}. {enumOption}").ToList();
+            List<string> indexedEnumOptions = Enum.GetNames(i_type).Select((enumOption, index) => $"{(index + 1).ToString()}. {enumOption}").ToList();
 
             return string.Join("\n", indexedEnumOptions);
         }
 
-        public static string DecreaseIntegerString(string inputString, int amountToDecrease)
+        public static string DecreaseIntegerString(string i_inputString, int i_amountToDecrease)
         {
-            string result = inputString;
+            string result = i_inputString;
 
-            if (int.TryParse(inputString, out int parsedInteger))
+            if (int.TryParse(i_inputString, out int o_parsedInteger))
             {
-                parsedInteger -= amountToDecrease;
-                result = parsedInteger.ToString();
+                o_parsedInteger -= i_amountToDecrease;
+                result = o_parsedInteger.ToString();
             }
 
             return result;

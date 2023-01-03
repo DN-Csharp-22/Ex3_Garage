@@ -13,13 +13,13 @@ namespace Ex03.GarageLogic
             { "BatteryMaxTime", "Please insert battery max time" },
         };
 
-        public ElectricVehicle(Dictionary<string, string> inputValues) : base(inputValues)
+        public ElectricVehicle(Dictionary<string, string> i_inputValues) : base(i_inputValues)
         {
-            if (inputValues != null)
+            if (i_inputValues != null)
             {
-                if (int.TryParse(inputValues["BatteryMaxTime"], out int BatteryMaxTimeInput))
+                if (int.TryParse(i_inputValues["BatteryMaxTime"], out int o_BatteryMaxTimeInput))
                 {
-                    this.BatteryMaxTime = BatteryMaxTimeInput;
+                    this.BatteryMaxTime = o_BatteryMaxTimeInput;
                 }
                 else
                 {
@@ -40,14 +40,14 @@ namespace Ex03.GarageLogic
             return result;
         }
 
-        public void RechargeBattery(float rechargeTimeInHours)
+        public void RechargeBattery(float i_rechargeTimeInHours)
         {
-            if (this.AmountOfEnergyLeft + rechargeTimeInHours > this.BatteryMaxTime)
+            if (this.AmountOfEnergyLeft + i_rechargeTimeInHours > this.BatteryMaxTime)
             {
                 throw new Exception("you have exceeded the maximun Ampere amount");
             }
 
-            this.AmountOfEnergyLeft += rechargeTimeInHours;
+            this.AmountOfEnergyLeft += i_rechargeTimeInHours;
         }
 
         public override string GetVehicleInformation()

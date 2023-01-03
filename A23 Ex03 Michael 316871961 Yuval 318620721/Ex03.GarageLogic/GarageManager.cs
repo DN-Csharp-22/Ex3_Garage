@@ -19,13 +19,13 @@ namespace Ex03.GarageLogic
            return VehicleFactory.ALLOWED_VEHICLES_DICTIONARY;
         }
 
-        public void createVehicle(Type vehicleType, Dictionary<string, string> inputValues)
+        public void createVehicle(Type i_vehicleType, Dictionary<string, string> i_inputValues)
         {
             VehicleFactory vehicleFactory = new VehicleFactory();
 
-            Vehicle newVehicle = vehicleFactory.CreateVehicle(vehicleType, inputValues);
+            Vehicle newVehicle = vehicleFactory.CreateVehicle(i_vehicleType, i_inputValues);
 
-            VehiclesInGarage.Add(inputValues["IdNumber"], newVehicle);
+            VehiclesInGarage.Add(i_inputValues["IdNumber"], newVehicle);
         }
 
         public List<Vehicle> getCurrentVehiclesInGarage()
@@ -34,32 +34,32 @@ namespace Ex03.GarageLogic
             return result;
         }
 
-        public Vehicle GetVehicle(string id)
+        public Vehicle GetVehicle(string i_id)
         {
-            KeyValuePair<string, Vehicle> foundVehicle = VehiclesInGarage.Where(vehicle => vehicle.Value.IdNumber == id.ToLower()).FirstOrDefault();
+            KeyValuePair<string, Vehicle> foundVehicle = VehiclesInGarage.Where(vehicle => vehicle.Value.IdNumber == i_id.ToLower()).FirstOrDefault();
 
             Vehicle result = foundVehicle.Value;
 
             return result;
         }
 
-        public Dictionary<string, string> getVehicleInputMessages(Type vehicleType)
+        public Dictionary<string, string> getVehicleInputMessages(Type i_vehicleType)
         {
             VehicleFactory vehicleFactory = new VehicleFactory();
 
-            Dictionary<string, string> inputMessages = vehicleFactory.GetInputMessages(vehicleType);
+            Dictionary<string, string> inputMessages = vehicleFactory.GetInputMessages(i_vehicleType);
 
             return inputMessages;
         }
 
-        public void updateVehicleStatus(string carLicenseNumber, VehicleStatus changeStatusOptionInput)
+        public void updateVehicleStatus(string i_carLicenseNumber, VehicleStatus i_changeStatusOptionInput)
         {
-            VehiclesInGarage[carLicenseNumber].vehicleStatus = changeStatusOptionInput;
+            VehiclesInGarage[i_carLicenseNumber].vehicleStatus = i_changeStatusOptionInput;
         }
 
-        public void fillTires(string carLicenseNumber)
+        public void fillTires(string i_carLicenseNumber)
         {
-            Vehicle currentVehicle = VehiclesInGarage[carLicenseNumber];
+            Vehicle currentVehicle = VehiclesInGarage[i_carLicenseNumber];
 
             foreach (Wheel wheel in currentVehicle.wheels)
             {
@@ -67,35 +67,35 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void chargingElectricMotor(string carLicenseNumber, int chargeTimeInMinutes)
+        public void chargingElectricMotor(string i_carLicenseNumber, int i_chargeTimeInMinutes)
         {
-            float chargeTimeInHours = (float)chargeTimeInMinutes / 60;
+            float chargeTimeInHours = (float)i_chargeTimeInMinutes / 60;
 
-            ElectricCar electricCar = (ElectricCar)VehiclesInGarage[carLicenseNumber];
+            ElectricCar electricCar = (ElectricCar)VehiclesInGarage[i_carLicenseNumber];
 
             electricCar.RechargeBattery(chargeTimeInHours);
         }
 
-        public void FillGasTank(string carLicenseNumber, GasType gasType, int amountToFill)
+        public void FillGasTank(string i_carLicenseNumber, GasType i_gasType, int i_amountToFill)
         {
-            if (VehiclesInGarage.ContainsKey(carLicenseNumber))
+            if (VehiclesInGarage.ContainsKey(i_carLicenseNumber))
             {
-                Vehicle vehicle = VehiclesInGarage[carLicenseNumber];
+                Vehicle vehicle = VehiclesInGarage[i_carLicenseNumber];
 
                 if(vehicle.GetType().BaseType == typeof(GasVehicle))
                 {
-                    ((GasVehicle)vehicle).FillGas(amountToFill);
+                    ((GasVehicle)vehicle).FillGas(i_amountToFill);
                 }
                 else
                 {
-                    throw new ArgumentException(string.Format("Vehicle with number : {0} is not an gas vehicle!", carLicenseNumber));
+                    throw new ArgumentException(string.Format("Vehicle with number : {0} is not an gas vehicle!", i_carLicenseNumber));
                 }
             }
         }
 
-        public string displayVehicleData(string carLicenseNumber)
+        public string displayVehicleData(string i_carLicenseNumber)
         {
-            Vehicle currentVehicle = VehiclesInGarage[carLicenseNumber];
+            Vehicle currentVehicle = VehiclesInGarage[i_carLicenseNumber];
 
             return currentVehicle.GetVehicleInformation();
         }

@@ -31,23 +31,23 @@ namespace Ex03.GarageLogic
             return result;
         }
 
-        public Wheel(Dictionary<string, string> inputValues)
+        public Wheel(Dictionary<string, string> i_inputValues)
         {
-            if (inputValues != null)
+            if (i_inputValues != null)
             {
-                this.ManufacturerName = inputValues["ManufacturerName"];
-                if (float.TryParse(inputValues["CurrentPressure"], out float currentPressureInput))
+                this.ManufacturerName = i_inputValues["ManufacturerName"];
+                if (float.TryParse(i_inputValues["CurrentPressure"], out float o_currentPressureInput))
                 {
-                    this.CurrentPressure = currentPressureInput;
+                    this.CurrentPressure = o_currentPressureInput;
                 }
                 else
                 {
                     throw new ArgumentException("Invalid current tire pressure amount was inserted");
                 }
 
-                if (float.TryParse(inputValues["MaxPressure"], out float maxPressureInput))
+                if (float.TryParse(i_inputValues["MaxPressure"], out float o_maxPressureInput))
                 {
-                    this.MaxPressure = maxPressureInput;
+                    this.MaxPressure = o_maxPressureInput;
                 }
                 else
                 {
@@ -67,14 +67,14 @@ namespace Ex03.GarageLogic
             return sb.ToString();
         }
 
-        public void FillTirePressure(float pressureToFill)
+        public void FillTirePressure(float i_pressureToFill)
         {
-            if (this.CurrentPressure + pressureToFill > this.MaxPressure)
+            if (this.CurrentPressure + i_pressureToFill > this.MaxPressure)
             {
                 throw new Exception("you have exceeded the maximun tire pressure");
             }
 
-            this.CurrentPressure += pressureToFill;
+            this.CurrentPressure += i_pressureToFill;
         }
     }
 }

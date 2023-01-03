@@ -16,17 +16,17 @@ namespace Ex03.GarageLogic
             { "doorAmount", string.Format("Please insert door amount out of : \n{0}", InputParameterUtils.GetEnumInputString(typeof(DoorAmount))) },
         };
 
-        public GasCar(Dictionary<string, string> inputValues = null) : base(inputValues)
+        public GasCar(Dictionary<string, string> i_inputValues = null) : base(i_inputValues)
         {
-            if (inputValues != null)
+            if (i_inputValues != null)
             {
-                if (int.TryParse(inputValues["carColor"], out int carColorInput) && Enum.IsDefined(typeof(CarColors), carColorInput - 1))
+                if (int.TryParse(i_inputValues["carColor"], out int o_carColorInput) && Enum.IsDefined(typeof(CarColors), o_carColorInput - 1))
                 {
-                    this.carColor = (CarColors)carColorInput;
+                    this.carColor = (CarColors)o_carColorInput;
 
-                    if (int.TryParse(inputValues["doorAmount"], out int doorAmountInput) && Enum.IsDefined(typeof(DoorAmount), doorAmountInput - 1))
+                    if (int.TryParse(i_inputValues["doorAmount"], out int o_doorAmountInput) && Enum.IsDefined(typeof(DoorAmount), o_doorAmountInput - 1))
                     {
-                        this.doorAmount = (DoorAmount)carColorInput;
+                        this.doorAmount = (DoorAmount)o_carColorInput;
                     }
                     else
                     {
