@@ -12,7 +12,7 @@ namespace Ex03.GarageLogic
 
         public DoorAmount doorAmount { get; set; }
 
-        protected new readonly Dictionary<string, string> inputMessages = new Dictionary<string, string>()
+        protected static new readonly Dictionary<string, string> inputMessages = new Dictionary<string, string>()
         {
             { "carColor",   string.Format("Please insert car color out of : \n{0}", InputParameterUtils.GetEnumInputString(typeof(CarColors))) },
             { "doorAmount", string.Format("Please insert door amount out of : \n{0}", InputParameterUtils.GetEnumInputString(typeof(DoorAmount))) },
@@ -22,11 +22,11 @@ namespace Ex03.GarageLogic
         {
             if (inputValues != null)
             {
-                if (int.TryParse(inputValues["carColor"], out int carColorInput) && Enum.IsDefined(typeof(CarColors), carColorInput))
+                if (int.TryParse(inputValues["carColor"], out int carColorInput) && Enum.IsDefined(typeof(CarColors), carColorInput - 1))
                 {
                     this.carColor = (CarColors)carColorInput;
 
-                    if (int.TryParse(inputValues["doorAmount"], out int doorAmountInput) && Enum.IsDefined(typeof(DoorAmount), doorAmountInput))
+                    if (int.TryParse(inputValues["doorAmount"], out int doorAmountInput) && Enum.IsDefined(typeof(DoorAmount), doorAmountInput - 1))
                     {
                         this.doorAmount = (DoorAmount)doorAmountInput;
                     }
@@ -42,9 +42,9 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public new Dictionary<string, string> GetInputMessages()
+        public static new Dictionary<string, string> GetInputMessages()
         {
-            Dictionary<string, string> result = base.GetInputMessages();
+            Dictionary<string, string> result = ElectricVehicle.GetInputMessages();
 
             foreach (string key in inputMessages.Keys)
             {
@@ -54,10 +54,12 @@ namespace Ex03.GarageLogic
             return result;
         }
 
-        public string GetVehicleInformation()
+        public override string GetVehicleInformation()
         {
             StringBuilder sb = new StringBuilder();
 
+            sb.AppendLine();
+            sb.AppendLine("Electric car");
             sb.AppendLine(base.GetVehicleInformation());
 
             sb.AppendLine(string.Format("Car color : {0}", this.carColor.ToString()));

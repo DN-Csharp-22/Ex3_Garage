@@ -6,11 +6,11 @@ namespace Ex03.GarageLogic
 {
     public abstract class ElectricVehicle : Vehicle
     {
-        public int BatteryMaxTime { get; set; }
+        public float BatteryMaxTime { get; set; }
 
-        protected new readonly Dictionary<string, string> inputMessages = new Dictionary<string, string>()
+        protected static new readonly Dictionary<string, string> inputMessages = new Dictionary<string, string>()
         {
-            { "BatteryMaxTime", string.Format("Please insert door amount out of : \n{0}", string.Join(",", Enum.GetNames(typeof(CarColors)))) },
+            { "BatteryMaxTime", "Please insert battery max time" },
         };
 
         public ElectricVehicle(Dictionary<string, string> inputValues) : base(inputValues)
@@ -28,19 +28,9 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void RechargeBattery(int rechargeTimeInHours)
+        public static new Dictionary<string, string> GetInputMessages()
         {
-            if (this.AmountOfEnergyLeft + rechargeTimeInHours > this.BatteryMaxTime)
-            {
-                throw new Exception("you have exceeded the maximun Ampere amount");
-            }
-
-            this.AmountOfEnergyLeft += rechargeTimeInHours;
-        }
-
-        public new Dictionary<string, string> GetInputMessages()
-        {
-            Dictionary<string, string> result = base.GetInputMessages();
+            Dictionary<string, string> result = Vehicle.GetInputMessages();
 
             foreach (string key in inputMessages.Keys)
             {
@@ -50,13 +40,23 @@ namespace Ex03.GarageLogic
             return result;
         }
 
-        public string GetVehicleInformation()
+        public void RechargeBattery(float rechargeTimeInHours)
+        {
+            if (this.AmountOfEnergyLeft + rechargeTimeInHours > this.BatteryMaxTime)
+            {
+                throw new Exception("you have exceeded the maximun Ampere amount");
+            }
+
+            this.AmountOfEnergyLeft += rechargeTimeInHours;
+        }
+
+        public override string GetVehicleInformation()
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine(base.GetVehicleInformation());
+            sb.Append(base.GetVehicleInformation());
 
-            sb.AppendLine(string.Format("Battery max time : {0}", this.BatteryMaxTime.ToString()));
+            sb.Append(string.Format("Battery max time : {0}", this.BatteryMaxTime.ToString()));
 
             return sb.ToString();
         }

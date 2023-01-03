@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
     {
         public LicenseType licenseType { get; set; }
 
-        protected new readonly Dictionary<string, string> inputMessages = new Dictionary<string, string>()
+        protected static new readonly Dictionary<string, string> inputMessages = new Dictionary<string, string>()
         {
             { "licenseType", string.Format("Please insert motorcycle license type out of : \n{0}", InputParameterUtils.GetEnumInputString(typeof(LicenseType))) },
         };
@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
         {
             if (inputValues != null)
             {
-                if (int.TryParse(inputValues["licenseType"], out int licenseTypeInput) && Enum.IsDefined(typeof(LicenseType), licenseTypeInput))
+                if (int.TryParse(inputValues["licenseType"], out int licenseTypeInput) && Enum.IsDefined(typeof(LicenseType), licenseTypeInput - 1))
                 {
                     this.licenseType = (LicenseType)licenseTypeInput;
                 }
@@ -29,9 +29,9 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public new Dictionary<string, string> GetInputMessages()
+        public static new Dictionary<string, string> GetInputMessages()
         {
-            Dictionary<string, string> result = base.GetInputMessages();
+            Dictionary<string, string> result = GasVehicle.GetInputMessages();
 
             foreach (string key in inputMessages.Keys)
             {
@@ -41,10 +41,12 @@ namespace Ex03.GarageLogic
             return result;
         }
 
-        public string GetVehicleInformation()
+        public override string GetVehicleInformation()
         {
             StringBuilder sb = new StringBuilder();
 
+            sb.AppendLine();
+            sb.AppendLine("Gas motorcycle");
             sb.AppendLine(base.GetVehicleInformation());
 
             sb.AppendLine(string.Format("License type : {0}", this.licenseType.ToString()));

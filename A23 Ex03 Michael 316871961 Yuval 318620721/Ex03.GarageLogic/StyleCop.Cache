@@ -23,29 +23,6 @@
     </timestamps>
     <violations />
   </sourcecode>
-  <sourcecode name="DoorAmount.cs" parser="StyleCop.CSharp.CsParser">
-    <timestamps>
-      <styleCop>2022/11/23 22:12:24.048</styleCop>
-      <settingsFile>2023/01/02 21:56:49.694</settingsFile>
-      <sourceFile>2022/12/31 13:57:13.955</sourceFile>
-      <parser>2022/11/23 22:12:24.048</parser>
-      <StyleCop.CSharp.DocumentationRules>2022/11/23 22:12:24.048</StyleCop.CSharp.DocumentationRules>
-      <StyleCop.CSharp.DocumentationRules.FilesHashCode>-864096321</StyleCop.CSharp.DocumentationRules.FilesHashCode>
-      <StyleCop.CSharp.LayoutRules>2022/11/23 22:12:24.048</StyleCop.CSharp.LayoutRules>
-      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
-      <StyleCop.CSharp.MaintainabilityRules>2022/11/23 22:12:24.048</StyleCop.CSharp.MaintainabilityRules>
-      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
-      <StyleCop.CSharp.NamingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.NamingRules>
-      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
-      <StyleCop.CSharp.OrderingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.OrderingRules>
-      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
-      <StyleCop.CSharp.ReadabilityRules>2022/11/23 22:12:24.048</StyleCop.CSharp.ReadabilityRules>
-      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
-      <StyleCop.CSharp.SpacingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.SpacingRules>
-      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
-    </timestamps>
-    <violations />
-  </sourcecode>
   <sourcecode name="GasType.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2022/11/23 22:12:24.048</styleCop>
@@ -161,11 +138,11 @@
     </timestamps>
     <violations />
   </sourcecode>
-  <sourcecode name="GarageManager.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="DoorAmount.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2022/11/23 22:12:24.048</styleCop>
       <settingsFile>2023/01/02 21:56:49.694</settingsFile>
-      <sourceFile>2023/01/02 22:14:23.647</sourceFile>
+      <sourceFile>2023/01/02 23:25:59.582</sourceFile>
       <parser>2022/11/23 22:12:24.048</parser>
       <StyleCop.CSharp.DocumentationRules>2022/11/23 22:12:24.048</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-864096321</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -188,7 +165,7 @@
     <timestamps>
       <styleCop>2022/11/23 22:12:24.048</styleCop>
       <settingsFile>2023/01/02 21:56:49.694</settingsFile>
-      <sourceFile>2023/01/02 22:39:16.180</sourceFile>
+      <sourceFile>2023/01/03 21:20:43.391</sourceFile>
       <parser>2022/11/23 22:12:24.048</parser>
       <StyleCop.CSharp.DocumentationRules>2022/11/23 22:12:24.048</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-864096321</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -207,11 +184,11 @@
     </timestamps>
     <violations />
   </sourcecode>
-  <sourcecode name="ElectricCar.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="GarageManager.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2022/11/23 22:12:24.048</styleCop>
       <settingsFile>2023/01/02 21:56:49.694</settingsFile>
-      <sourceFile>2023/01/02 22:42:00.431</sourceFile>
+      <sourceFile>2023/01/03 22:24:32.639</sourceFile>
       <parser>2022/11/23 22:12:24.048</parser>
       <StyleCop.CSharp.DocumentationRules>2022/11/23 22:12:24.048</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-864096321</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -228,59 +205,19 @@
       <StyleCop.CSharp.SpacingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.SpacingRules>
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
-    <violations />
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketsMustNotBePrecededByBlankLine" ruleCheckId="SA1508">
+        <context>A closing curly bracket must not be preceded by a blank line.</context>
+        <line>95</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
   </sourcecode>
-  <sourcecode name="ElectricMotorcycle.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="GasVehicle.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2022/11/23 22:12:24.048</styleCop>
       <settingsFile>2023/01/02 21:56:49.694</settingsFile>
-      <sourceFile>2023/01/02 22:42:00.444</sourceFile>
-      <parser>2022/11/23 22:12:24.048</parser>
-      <StyleCop.CSharp.DocumentationRules>2022/11/23 22:12:24.048</StyleCop.CSharp.DocumentationRules>
-      <StyleCop.CSharp.DocumentationRules.FilesHashCode>-864096321</StyleCop.CSharp.DocumentationRules.FilesHashCode>
-      <StyleCop.CSharp.LayoutRules>2022/11/23 22:12:24.048</StyleCop.CSharp.LayoutRules>
-      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
-      <StyleCop.CSharp.MaintainabilityRules>2022/11/23 22:12:24.048</StyleCop.CSharp.MaintainabilityRules>
-      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
-      <StyleCop.CSharp.NamingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.NamingRules>
-      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
-      <StyleCop.CSharp.OrderingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.OrderingRules>
-      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
-      <StyleCop.CSharp.ReadabilityRules>2022/11/23 22:12:24.048</StyleCop.CSharp.ReadabilityRules>
-      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
-      <StyleCop.CSharp.SpacingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.SpacingRules>
-      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
-    </timestamps>
-    <violations />
-  </sourcecode>
-  <sourcecode name="Truck.cs" parser="StyleCop.CSharp.CsParser">
-    <timestamps>
-      <styleCop>2022/11/23 22:12:24.048</styleCop>
-      <settingsFile>2023/01/02 21:56:49.694</settingsFile>
-      <sourceFile>2023/01/02 22:42:00.454</sourceFile>
-      <parser>2022/11/23 22:12:24.048</parser>
-      <StyleCop.CSharp.DocumentationRules>2022/11/23 22:12:24.048</StyleCop.CSharp.DocumentationRules>
-      <StyleCop.CSharp.DocumentationRules.FilesHashCode>-864096321</StyleCop.CSharp.DocumentationRules.FilesHashCode>
-      <StyleCop.CSharp.LayoutRules>2022/11/23 22:12:24.048</StyleCop.CSharp.LayoutRules>
-      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
-      <StyleCop.CSharp.MaintainabilityRules>2022/11/23 22:12:24.048</StyleCop.CSharp.MaintainabilityRules>
-      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
-      <StyleCop.CSharp.NamingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.NamingRules>
-      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
-      <StyleCop.CSharp.OrderingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.OrderingRules>
-      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
-      <StyleCop.CSharp.ReadabilityRules>2022/11/23 22:12:24.048</StyleCop.CSharp.ReadabilityRules>
-      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
-      <StyleCop.CSharp.SpacingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.SpacingRules>
-      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
-    </timestamps>
-    <violations />
-  </sourcecode>
-  <sourcecode name="ElectricVehicle.cs" parser="StyleCop.CSharp.CsParser">
-    <timestamps>
-      <styleCop>2022/11/23 22:12:24.048</styleCop>
-      <settingsFile>2023/01/02 21:56:49.694</settingsFile>
-      <sourceFile>2023/01/02 22:42:00.458</sourceFile>
+      <sourceFile>2023/01/03 21:28:22.224</sourceFile>
       <parser>2022/11/23 22:12:24.048</parser>
       <StyleCop.CSharp.DocumentationRules>2022/11/23 22:12:24.048</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-864096321</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -303,7 +240,7 @@
     <timestamps>
       <styleCop>2022/11/23 22:12:24.048</styleCop>
       <settingsFile>2023/01/02 21:56:49.694</settingsFile>
-      <sourceFile>2023/01/02 22:43:26.431</sourceFile>
+      <sourceFile>2023/01/03 21:26:12.698</sourceFile>
       <parser>2022/11/23 22:12:24.048</parser>
       <StyleCop.CSharp.DocumentationRules>2022/11/23 22:12:24.048</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-864096321</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -326,7 +263,7 @@
     <timestamps>
       <styleCop>2022/11/23 22:12:24.048</styleCop>
       <settingsFile>2023/01/02 21:56:49.694</settingsFile>
-      <sourceFile>2023/01/02 22:43:47.133</sourceFile>
+      <sourceFile>2023/01/03 21:33:58.149</sourceFile>
       <parser>2022/11/23 22:12:24.048</parser>
       <StyleCop.CSharp.DocumentationRules>2022/11/23 22:12:24.048</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-864096321</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -345,14 +282,11 @@
     </timestamps>
     <violations />
   </sourcecode>
-  <project key="-1964144698">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
-  <sourcecode name="GasCar.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="Truck.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2022/11/23 22:12:24.048</styleCop>
       <settingsFile>2023/01/02 21:56:49.694</settingsFile>
-      <sourceFile>2023/01/02 23:02:02.655</sourceFile>
+      <sourceFile>2023/01/03 22:27:52.737</sourceFile>
       <parser>2022/11/23 22:12:24.048</parser>
       <StyleCop.CSharp.DocumentationRules>2022/11/23 22:12:24.048</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-864096321</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -375,7 +309,7 @@
     <timestamps>
       <styleCop>2022/11/23 22:12:24.048</styleCop>
       <settingsFile>2023/01/02 21:56:49.694</settingsFile>
-      <sourceFile>2023/01/02 22:57:49.703</sourceFile>
+      <sourceFile>2023/01/03 22:27:59.695</sourceFile>
       <parser>2022/11/23 22:12:24.048</parser>
       <StyleCop.CSharp.DocumentationRules>2022/11/23 22:12:24.048</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-864096321</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -394,11 +328,83 @@
     </timestamps>
     <violations />
   </sourcecode>
-  <sourcecode name="GasVehicle.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="GasCar.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2022/11/23 22:12:24.048</styleCop>
       <settingsFile>2023/01/02 21:56:49.694</settingsFile>
-      <sourceFile>2023/01/02 22:55:57.887</sourceFile>
+      <sourceFile>2023/01/03 22:28:04.636</sourceFile>
+      <parser>2022/11/23 22:12:24.048</parser>
+      <StyleCop.CSharp.DocumentationRules>2022/11/23 22:12:24.048</StyleCop.CSharp.DocumentationRules>
+      <StyleCop.CSharp.DocumentationRules.FilesHashCode>-864096321</StyleCop.CSharp.DocumentationRules.FilesHashCode>
+      <StyleCop.CSharp.LayoutRules>2022/11/23 22:12:24.048</StyleCop.CSharp.LayoutRules>
+      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
+      <StyleCop.CSharp.MaintainabilityRules>2022/11/23 22:12:24.048</StyleCop.CSharp.MaintainabilityRules>
+      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
+      <StyleCop.CSharp.NamingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.NamingRules>
+      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
+      <StyleCop.CSharp.OrderingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.OrderingRules>
+      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
+      <StyleCop.CSharp.ReadabilityRules>2022/11/23 22:12:24.048</StyleCop.CSharp.ReadabilityRules>
+      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
+      <StyleCop.CSharp.SpacingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.SpacingRules>
+      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
+    </timestamps>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ElectricVehicle.cs" parser="StyleCop.CSharp.CsParser">
+    <timestamps>
+      <styleCop>2022/11/23 22:12:24.048</styleCop>
+      <settingsFile>2023/01/02 21:56:49.694</settingsFile>
+      <sourceFile>2023/01/03 22:28:08.874</sourceFile>
+      <parser>2022/11/23 22:12:24.048</parser>
+      <StyleCop.CSharp.DocumentationRules>2022/11/23 22:12:24.048</StyleCop.CSharp.DocumentationRules>
+      <StyleCop.CSharp.DocumentationRules.FilesHashCode>-864096321</StyleCop.CSharp.DocumentationRules.FilesHashCode>
+      <StyleCop.CSharp.LayoutRules>2022/11/23 22:12:24.048</StyleCop.CSharp.LayoutRules>
+      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
+      <StyleCop.CSharp.MaintainabilityRules>2022/11/23 22:12:24.048</StyleCop.CSharp.MaintainabilityRules>
+      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
+      <StyleCop.CSharp.NamingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.NamingRules>
+      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
+      <StyleCop.CSharp.OrderingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.OrderingRules>
+      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
+      <StyleCop.CSharp.ReadabilityRules>2022/11/23 22:12:24.048</StyleCop.CSharp.ReadabilityRules>
+      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
+      <StyleCop.CSharp.SpacingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.SpacingRules>
+      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
+    </timestamps>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ElectricMotorcycle.cs" parser="StyleCop.CSharp.CsParser">
+    <timestamps>
+      <styleCop>2022/11/23 22:12:24.048</styleCop>
+      <settingsFile>2023/01/02 21:56:49.694</settingsFile>
+      <sourceFile>2023/01/03 22:28:13.184</sourceFile>
+      <parser>2022/11/23 22:12:24.048</parser>
+      <StyleCop.CSharp.DocumentationRules>2022/11/23 22:12:24.048</StyleCop.CSharp.DocumentationRules>
+      <StyleCop.CSharp.DocumentationRules.FilesHashCode>-864096321</StyleCop.CSharp.DocumentationRules.FilesHashCode>
+      <StyleCop.CSharp.LayoutRules>2022/11/23 22:12:24.048</StyleCop.CSharp.LayoutRules>
+      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
+      <StyleCop.CSharp.MaintainabilityRules>2022/11/23 22:12:24.048</StyleCop.CSharp.MaintainabilityRules>
+      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
+      <StyleCop.CSharp.NamingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.NamingRules>
+      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
+      <StyleCop.CSharp.OrderingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.OrderingRules>
+      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
+      <StyleCop.CSharp.ReadabilityRules>2022/11/23 22:12:24.048</StyleCop.CSharp.ReadabilityRules>
+      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
+      <StyleCop.CSharp.SpacingRules>2022/11/23 22:12:24.048</StyleCop.CSharp.SpacingRules>
+      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
+    </timestamps>
+    <violations />
+  </sourcecode>
+  <project key="-1964144698">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="ElectricCar.cs" parser="StyleCop.CSharp.CsParser">
+    <timestamps>
+      <styleCop>2022/11/23 22:12:24.048</styleCop>
+      <settingsFile>2023/01/02 21:56:49.694</settingsFile>
+      <sourceFile>2023/01/03 22:28:17.595</sourceFile>
       <parser>2022/11/23 22:12:24.048</parser>
       <StyleCop.CSharp.DocumentationRules>2022/11/23 22:12:24.048</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-864096321</StyleCop.CSharp.DocumentationRules.FilesHashCode>

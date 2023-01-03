@@ -69,6 +69,7 @@ namespace Ex03.ConsoleUI
                     default:
                         throw new ArgumentException("Invalid action number was chosen");
                 }
+
                 Console.Clear();
                 Console.WriteLine(">>> Command has been finished successfully\n");
             }
@@ -86,7 +87,7 @@ namespace Ex03.ConsoleUI
 
             if (currentVehicle == null)
             {
-                Type vehicleType = GetVehicleType();
+                Type vehicleType = GetVehicleType(garageManager);
 
                 Dictionary<string, string> inputMessages = garageManager.getVehicleInputMessages(vehicleType);
 
@@ -101,7 +102,6 @@ namespace Ex03.ConsoleUI
 
                 inputValues["IdNumber"] = carLicenseNumber;
 
-
                 garageManager.createVehicle(vehicleType, inputValues);
             }
             else
@@ -110,15 +110,17 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private static Type GetVehicleType()
+        private static Type GetVehicleType(GarageManager garageManager)
         {
-            List<string> numberedAllowedVehicleList = GarageManager.ALLOWED_VEHICLES_DICTIONARY.Select((type, index) => $"{(index + 1).ToString()}. {type.Value.Name}").ToList();
+            Dictionary<string, Type> allowedVehicles = garageManager.GetAllowedVehicles();
+
+            List<string> numberedAllowedVehicleList = allowedVehicles.Select((type, index) => $"{(index + 1).ToString()}. {type.Value.Name}").ToList();
 
             string getVehicleTypeMessage = string.Format("Please choose one of the following vehicle types : \n{0}", string.Join("\n", numberedAllowedVehicleList));
 
-            int vehicleType = InputUtils.GetNumericInput(getVehicleTypeMessage, 0, GarageManager.ALLOWED_VEHICLES_DICTIONARY.Count);
+            int vehicleType = InputUtils.GetNumericInput(getVehicleTypeMessage, 0, numberedAllowedVehicleList.Count + 1);
 
-            return GarageManager.ALLOWED_VEHICLES_DICTIONARY[vehicleType.ToString()];
+            return allowedVehicles[vehicleType.ToString()];
         }
 
         private static void fillGasTank(GarageManager garageManager)
@@ -231,7 +233,7 @@ namespace Ex03.ConsoleUI
                             case (int)VehicleStatus.InService:
                             case (int)VehicleStatus.Fixed:
                             case (int)VehicleStatus.Completed:
-                                garageManager.updateVehicleStatus(carLicenseNumber, (VehicleStatus)changeStatusOption);
+                                garageManager.updateVehicleStatus(carLicenseNumber, (VehicleStatus)(changeStatusOption - 1));
                                 isInputValid = true;
                                 break;
                             default:
@@ -259,7 +261,7 @@ namespace Ex03.ConsoleUI
     3. Change vehicle status
     4. Fill tire pressure to maximum
     5. Fill gas tank
-    6. Recharge cehicle
+    6. Recharge vehicle
     7. Display complete vehicle data");
 
             string actionNumber = Console.ReadLine();
@@ -273,7 +275,10 @@ namespace Ex03.ConsoleUI
 
             List<string> listOfVehicleIds = listOfVehiclesAtGarage.Select(vehicle => vehicle.IdNumber).ToList();
 
-            Console.WriteLine(string.Format("All vehicles at garage are :\n {0}", string.Join("\n", listOfVehiclesAtGarage.Select(v => v.IdNumber).ToArray())));
+            List<string> formatedListOfVehicles = listOfVehiclesAtGarage.Select(vehicle =>
+                string.Format("{0} : {1} : {2}", vehicle.GetType().Name, vehicle.IdNumber, vehicle.vehicleStatus.ToString())).ToList();
+
+            Console.WriteLine(string.Format("All vehicles at garage are :\n {0}", string.Join("\n", formatedListOfVehicles).ToArray()));
 
             bool isInputValid = false;
 
@@ -289,10 +294,10 @@ namespace Ex03.ConsoleUI
                         case (int)VehicleStatus.Fixed:
                         case (int)VehicleStatus.Completed:
                             listOfVehicleIds = listOfVehiclesAtGarage
-                                .Where(vechile => vechile.vehicleStatus == (VehicleStatus)filterOption - 1)
-                                .Select(vehicle => vehicle.IdNumber).ToList();
-                            List<string> indexedVehiclesList = listOfVehiclesAtGarage.Select(v => v.IdNumber).ToList();
-                            Console.WriteLine(string.Format("Filtered vehicles are :\n {0}", string.Join("\n", indexedVehiclesList)));
+                                .Where(vechile => vechile.vehicleStatus == (VehicleStatus)(filterOption - 1))
+                                .Select(vehicle => string.Format("{0} : {1} : {2}", vehicle.GetType().Name, vehicle.IdNumber, vehicle.vehicleStatus.ToString())).ToList();
+                            Console.WriteLine(string.Format("Filtered vehicles are :\n{0}", string.Join("\n", listOfVehicleIds)));
+                            Console.ReadKey();
                             isInputValid = true;
                             break;
                         case 4:
@@ -342,7 +347,7 @@ namespace Ex03.ConsoleUI
                 {
                     if (amountToFill >= 0)
                     {
-                        isValid = false;
+                        isValid = true;
                     }
                 }
                 else

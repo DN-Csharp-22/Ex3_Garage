@@ -12,9 +12,9 @@ namespace Ex03.GarageLogic
 
         public float cargoVolume { get; set; }
 
-        protected new readonly Dictionary<string, string> inputMessages = new Dictionary<string, string>()
+        protected static new readonly Dictionary<string, string> inputMessages = new Dictionary<string, string>()
         {
-            { "isMovingDangerousMaterials", "Please insert 'true' for moving dangerous materials or 'no' for not moving" },
+            { "isMovingDangerousMaterials", "Please insert yes/no for moving dangerous materials" },
             { "cargoVolume", "Please insert cargo volume" },
         };
 
@@ -22,11 +22,11 @@ namespace Ex03.GarageLogic
         {
             if (inputValues != null)
             {
-                if (inputValues["isMovingDangerousMaterials"].ToLower() == "true")
+                if (inputValues["isMovingDangerousMaterials"].ToLower() == "yes")
                 {
                     this.isMovingDangerousMaterials = true;
                 }
-                else if (inputValues["isMovingDangerousMaterials"].ToLower() == "false")
+                else if (inputValues["isMovingDangerousMaterials"].ToLower() == "no")
                 {
                     this.isMovingDangerousMaterials = false;
                 }
@@ -46,9 +46,9 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public new Dictionary<string, string> GetInputMessages()
+        public static new Dictionary<string, string> GetInputMessages()
         {
-            Dictionary<string, string> result = base.GetInputMessages();
+            Dictionary<string, string> result = GasVehicle.GetInputMessages();
 
             foreach (string key in inputMessages.Keys)
             {
@@ -58,10 +58,12 @@ namespace Ex03.GarageLogic
             return result;
         }
 
-        public string GetVehicleInformation()
+        public override string GetVehicleInformation()
         {
             StringBuilder sb = new StringBuilder();
 
+            sb.AppendLine();
+            sb.AppendLine("Truck");
             sb.AppendLine(base.GetVehicleInformation());
 
             sb.AppendLine(string.Format("Is Moving Dangerous Materials : {0}", this.isMovingDangerousMaterials.ToString()));

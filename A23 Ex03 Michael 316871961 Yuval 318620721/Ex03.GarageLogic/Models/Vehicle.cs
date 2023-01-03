@@ -14,11 +14,11 @@ namespace Ex03.GarageLogic
 
         public float AmountOfEnergyLeft { get; set; }
 
-        public List<Wheel> wheels { get; set; }
+        internal List<Wheel> wheels { get; set; }
 
         public VehicleStatus vehicleStatus { get; set; }
 
-        protected readonly Dictionary<string, string> inputMessages = new Dictionary<string, string>()
+        protected static readonly Dictionary<string, string> inputMessages = new Dictionary<string, string>()
         {
             { "Model", "Please insert vehicle model" },
             { "AmountOfEnergyLeft", "Please insert vehicle power source left amount" },
@@ -57,9 +57,9 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public Dictionary<string, string> GetInputMessages()
+        public static Dictionary<string, string> GetInputMessages()
         {
-            Dictionary<string, string> result = (new Wheel(null)).GetInputMessages();
+            Dictionary<string, string> result = Wheel.GetInputMessages();
 
             foreach (string key in inputMessages.Keys)
             {
@@ -69,7 +69,7 @@ namespace Ex03.GarageLogic
             return result;
         }
 
-        public string GetVehicleInformation()
+        public virtual string GetVehicleInformation()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -77,7 +77,7 @@ namespace Ex03.GarageLogic
             sb.AppendLine(string.Format("Model : {0}", this.Model));
             sb.AppendLine(string.Format("AmountOfEnergyLeft : {0}", this.AmountOfEnergyLeft));
             sb.AppendLine(string.Format("Wheel amount : {0}", this.wheels.Count));
-            sb.AppendLine(string.Format("Wheel information : {0}", wheels.FirstOrDefault().GetVehicleInformation()));
+            sb.AppendLine(string.Format("Wheel information : \n{0}", wheels.FirstOrDefault().GetVehicleInformation()));
 
             return sb.ToString();
         }

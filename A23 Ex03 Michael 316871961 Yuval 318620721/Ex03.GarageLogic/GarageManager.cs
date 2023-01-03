@@ -7,20 +7,16 @@ namespace Ex03.GarageLogic
 {
     public class GarageManager
     {
-        public static readonly Dictionary<string, Type> ALLOWED_VEHICLES_DICTIONARY = new Dictionary<string, Type> 
-        {
-            { "1", typeof(GasCar) },
-            { "2", typeof(ElectricCar) },
-            { "3", typeof(GasMotorcycle) },
-            { "4", typeof(ElectricMotorcycle) },
-            { "5", typeof(Truck) }
-        };
-
         private Dictionary<string, Vehicle> VehiclesInGarage { get; set; }
 
         public GarageManager()
         {
             this.VehiclesInGarage = new Dictionary<string, Vehicle>();
+        }
+
+        public Dictionary<string, Type> GetAllowedVehicles()
+        {
+           return VehicleFactory.ALLOWED_VEHICLES_DICTIONARY;
         }
 
         public void createVehicle(Type vehicleType, Dictionary<string, string> inputValues)
@@ -73,7 +69,7 @@ namespace Ex03.GarageLogic
 
         public void chargingElectricMotor(string carLicenseNumber, int chargeTimeInMinutes)
         {
-            int chargeTimeInHours = chargeTimeInMinutes / 60;
+            float chargeTimeInHours = (float)chargeTimeInMinutes / 60;
 
             ElectricCar electricCar = (ElectricCar)VehiclesInGarage[carLicenseNumber];
 
@@ -82,42 +78,26 @@ namespace Ex03.GarageLogic
 
         public void FillGasTank(string carLicenseNumber, GasType gasType, int amountToFill)
         {
-            if (VehiclesInGarage[carLicenseNumber].GetType() == typeof(GasCar))
+            if (VehiclesInGarage.ContainsKey(carLicenseNumber))
             {
-                GasCar gasCar = (GasCar)VehiclesInGarage[carLicenseNumber];
+                Vehicle vehicle = VehiclesInGarage[carLicenseNumber];
 
-                if (gasCar.gasType != gasType)
+                if(vehicle.GetType().BaseType == typeof(GasVehicle))
                 {
-                    throw new ArgumentException("Requested Gas type differs from the current gas type");
+                    ((GasVehicle)vehicle).FillGas(amountToFill);
                 }
-
-                gasCar.FillGas(amountToFill);
-            }
-            else if (VehiclesInGarage[carLicenseNumber].GetType() == typeof(GasMotorcycle))
-            {
-                GasMotorcycle gasMotorcycle = (GasMotorcycle)VehiclesInGarage[carLicenseNumber];
-
-                if (gasMotorcycle.gasType != gasType)
+                else
                 {
-                    throw new ArgumentException("Requested Gas type differs from the current gas type");
+                    throw new ArgumentException(string.Format("Vehicle with number : {0} is not an gas vehicle!", carLicenseNumber));
                 }
-
-                gasMotorcycle.FillGas(amountToFill);
-            }
-            else
-            {
-                throw new ArgumentException(string.Format("Vehicle with number : {0} is not an gas vehicle!", carLicenseNumber));
             }
         }
 
         public string displayVehicleData(string carLicenseNumber)
         {
-            object currentVehicle = VehiclesInGarage[carLicenseNumber];
-            Type t = currentVehicle.GetType();
+            Vehicle currentVehicle = VehiclesInGarage[carLicenseNumber];
 
-            object b = Convert.ChangeType(VehiclesInGarage[carLicenseNumber], VehiclesInGarage[carLicenseNumber].GetType());
-
-            return (Vehicle)b.GetVehicleInformation();
+            return currentVehicle.GetVehicleInformation();
         }
     }
 }

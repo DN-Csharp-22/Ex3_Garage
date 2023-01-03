@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic
 
         public float MaxFuelAmount { get; set; }
 
-        protected new readonly Dictionary<string, string> inputMessages = new Dictionary<string, string>()
+        protected static new readonly Dictionary<string, string> inputMessages = new Dictionary<string, string>()
         {
             { "gasType", string.Format("Please insert gas type out of : \n{0}", InputParameterUtils.GetEnumInputString(typeof(GasType))) },
             { "MaxFuelAmount", "Please insert max fuel amount" }
@@ -21,7 +21,7 @@ namespace Ex03.GarageLogic
         {
             if (inputValues != null)
             {
-                if (int.TryParse(inputValues["gasType"], out int gasTypeInput) && Enum.IsDefined(typeof(GasType), gasTypeInput))
+                if (int.TryParse(inputValues["gasType"], out int gasTypeInput) && Enum.IsDefined(typeof(GasType), gasTypeInput - 1))
                 {
                     this.gasType = (GasType)gasTypeInput;
 
@@ -41,6 +41,18 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public static new Dictionary<string, string> GetInputMessages()
+        {
+            Dictionary<string, string> result = Vehicle.GetInputMessages();
+
+            foreach (string key in inputMessages.Keys)
+            {
+                result.Add(key, inputMessages[key]);
+            }
+
+            return result;
+        }
+
         public void FillGas(float amountToFill)
         {
             if (this.AmountOfEnergyLeft + amountToFill > this.MaxFuelAmount)
@@ -51,26 +63,14 @@ namespace Ex03.GarageLogic
             this.AmountOfEnergyLeft += amountToFill;
         }
 
-        public new Dictionary<string, string> GetInputMessages()
-        {
-            Dictionary<string, string> result = base.GetInputMessages();
-
-            foreach (string key in inputMessages.Keys)
-            {
-                result.Add(key, inputMessages[key]);
-            }
-
-            return result;
-        }
-
-        public string GetVehicleInformation()
+        public override string GetVehicleInformation()
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine(base.GetVehicleInformation());
+            sb.Append(base.GetVehicleInformation());
 
             sb.AppendLine(string.Format("Gas type : {0}", this.gasType.ToString()));
-            sb.AppendLine(string.Format("MaxFuelAmount : {0}", this.MaxFuelAmount));
+            sb.Append(string.Format("MaxFuelAmount : {0}", this.MaxFuelAmount));
 
             return sb.ToString();
         }

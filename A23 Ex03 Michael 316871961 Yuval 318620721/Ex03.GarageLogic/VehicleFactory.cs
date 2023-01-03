@@ -8,6 +8,15 @@ namespace Ex03.GarageLogic
 {
     internal class VehicleFactory
     {
+        public static readonly Dictionary<string, Type> ALLOWED_VEHICLES_DICTIONARY = new Dictionary<string, Type>
+        {
+            { "1", typeof(GasCar) },
+            { "2", typeof(ElectricCar) },
+            { "3", typeof(GasMotorcycle) },
+            { "4", typeof(ElectricMotorcycle) },
+            { "5", typeof(Truck) }
+        };
+
         public Vehicle CreateVehicle(Type vehicleType, Dictionary<string, string> inputValues)
         {
             Vehicle result = null;
@@ -43,19 +52,19 @@ namespace Ex03.GarageLogic
             switch (vehicleType.Name)
             {
                 case nameof(GasCar):
-                    inputMessages = (new GasCar()).GetInputMessages();
+                    inputMessages = GasCar.GetInputMessages();
                     break;
                 case nameof(ElectricCar):
-                    inputMessages = (new ElectricCar()).GetInputMessages();
+                    inputMessages = ElectricCar.GetInputMessages();
                     break;
                 case nameof(GasMotorcycle):
-                    inputMessages = (new GasMotorcycle()).GetInputMessages();
+                    inputMessages = GasMotorcycle.GetInputMessages();
                     break;
                 case nameof(ElectricMotorcycle):
-                    inputMessages = (new ElectricMotorcycle()).GetInputMessages();
+                    inputMessages = ElectricMotorcycle.GetInputMessages();
                     break;
                 case nameof(Truck):
-                    inputMessages = (new Truck()).GetInputMessages();
+                    inputMessages = Truck.GetInputMessages();
                     break;
                 default:
                     throw new Exception("unsupported vehicle");

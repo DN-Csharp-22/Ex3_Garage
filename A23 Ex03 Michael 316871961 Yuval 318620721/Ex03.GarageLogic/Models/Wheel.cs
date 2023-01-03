@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public class Wheel
+    internal class Wheel
     {
         public string ManufacturerName { get; set; }
 
@@ -12,16 +12,23 @@ namespace Ex03.GarageLogic
 
         public float MaxPressure { get; set; }
 
-        private readonly Dictionary<string, string> inputMessages = new Dictionary<string, string>()
+        private static readonly Dictionary<string, string> inputMessages = new Dictionary<string, string>()
         {
             { "ManufacturerName", "Please insert tire manufacturer name" },
             { "CurrentPressure", "Please insert tire current pressure amount" },
             { "MaxPressure", "Please insert tire max pressure amount" }
         };
 
-        public Dictionary<string, string> GetInputMessages()
+        internal static Dictionary<string, string> GetInputMessages()
         {
-            return inputMessages;
+            Dictionary<string, string> result = new Dictionary<string, string>();
+
+            foreach (string key in inputMessages.Keys)
+            {
+                result.Add(key, inputMessages[key]);
+            }
+            
+            return result;
         }
 
         public Wheel(Dictionary<string, string> inputValues)
@@ -55,7 +62,7 @@ namespace Ex03.GarageLogic
 
             sb.AppendLine(string.Format("ManufacturerName : {0}", this.ManufacturerName));
             sb.AppendLine(string.Format("CurrentPressure : {0}", this.CurrentPressure));
-            sb.AppendLine(string.Format("MaxPressure : {0}", this.MaxPressure));
+            sb.Append(string.Format("MaxPressure : {0}", this.MaxPressure));
 
             return sb.ToString();
         }
